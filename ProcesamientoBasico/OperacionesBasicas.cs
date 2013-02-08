@@ -56,5 +56,38 @@ namespace ProcesamientoBasico
                 }
         }
 
+        public void componenteRojo()
+        {
+            RGB = new int[Width * Height];
+            for (int j = 0; j < Height; j++)
+                for (int i = 0; i < Width; i++)
+                {
+                    int it = j * Width + i;
+                    RGB[it] = (0xff << 24) | (R[it] << 16);
+                }    
+        }
+
+        public void componenteVerde()
+        {
+            RGB = new int[Width * Height];
+            for (int j = 0; j < Height; j++)
+                for (int i = 0; i < Width; i++)
+                {
+                    int it = j * Width + i;
+                    RGB[it] = (0xff << 24) | (G[it] << 8);
+                }    
+        }
+
+        public void componenteAzul()
+        {
+            RGB = new int[Width * Height];
+            for (int j = 0; j < Height; j++)
+                for (int i = 0; i < Width; i++)
+                {
+                    int it = j * Width + i;
+                    RGB[it] = (0xff << 24) | B[it];
+                }    
+        }
+
     }
 }

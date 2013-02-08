@@ -50,5 +50,29 @@ namespace ProcesamientoBasico
             ob.componerRGB();
             PBImagen.Image = ob.getMapa();
         }
+
+        private void componenteRojoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            ob.descomponerRGB();
+            ob.componenteRojo();
+            PBImagen.Image = ob.getMapa();
+        }
+
+        private void componenteVerdeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            ob.descomponerRGB();
+            ob.componenteVerde();
+            PBImagen.Image = ob.getMapa();
+        }
+
+        private void componenteAzulToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            ob.descomponerRGB();
+            ob.componenteAzul();
+            PBImagen.Image = ob.getMapa();
+        }
     }
 }
