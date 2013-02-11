@@ -36,12 +36,13 @@
             this.escalaDeGrisesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.binarizacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.negativoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
-            this.SFImagen = new System.Windows.Forms.SaveFileDialog();
-            this.PBImagen = new System.Windows.Forms.PictureBox();
             this.componenteRojoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componenteVerdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componenteAzulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
+            this.SFImagen = new System.Windows.Forms.SaveFileDialog();
+            this.PBImagen = new System.Windows.Forms.PictureBox();
+            this.clasificacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             this.operacionesBasicasToolStripMenuItem});
             this.MSPrincipal.Location = new System.Drawing.Point(0, 0);
             this.MSPrincipal.Name = "MSPrincipal";
-            this.MSPrincipal.Size = new System.Drawing.Size(284, 24);
+            this.MSPrincipal.Size = new System.Drawing.Size(652, 24);
             this.MSPrincipal.TabIndex = 0;
             this.MSPrincipal.Text = "menuStrip1";
             // 
@@ -87,7 +88,8 @@
             this.negativoToolStripMenuItem,
             this.componenteRojoToolStripMenuItem,
             this.componenteVerdeToolStripMenuItem,
-            this.componenteAzulToolStripMenuItem});
+            this.componenteAzulToolStripMenuItem,
+            this.clasificacionToolStripMenuItem});
             this.operacionesBasicasToolStripMenuItem.Name = "operacionesBasicasToolStripMenuItem";
             this.operacionesBasicasToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.operacionesBasicasToolStripMenuItem.Text = "Operaciones Basicas";
@@ -95,47 +97,28 @@
             // escalaDeGrisesToolStripMenuItem
             // 
             this.escalaDeGrisesToolStripMenuItem.Name = "escalaDeGrisesToolStripMenuItem";
-            this.escalaDeGrisesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.escalaDeGrisesToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.escalaDeGrisesToolStripMenuItem.Text = "Escala De Grises";
             this.escalaDeGrisesToolStripMenuItem.Click += new System.EventHandler(this.escalaDeGrisesToolStripMenuItem_Click);
             // 
             // binarizacionToolStripMenuItem
             // 
             this.binarizacionToolStripMenuItem.Name = "binarizacionToolStripMenuItem";
-            this.binarizacionToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.binarizacionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.binarizacionToolStripMenuItem.Text = "Binarizacion";
             this.binarizacionToolStripMenuItem.Click += new System.EventHandler(this.binarizacionToolStripMenuItem_Click);
             // 
             // negativoToolStripMenuItem
             // 
             this.negativoToolStripMenuItem.Name = "negativoToolStripMenuItem";
-            this.negativoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.negativoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.negativoToolStripMenuItem.Text = "Negativo";
             this.negativoToolStripMenuItem.Click += new System.EventHandler(this.negativoToolStripMenuItem_Click);
-            // 
-            // OFIMagen
-            // 
-            this.OFIMagen.FileName = "openFileDialog1";
-            // 
-            // SFImagen
-            // 
-            this.SFImagen.Filter = "\"mapas de bits|*.bmp|jpeges|*.jpg\"";
-            // 
-            // PBImagen
-            // 
-            this.PBImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PBImagen.Location = new System.Drawing.Point(12, 27);
-            this.PBImagen.Name = "PBImagen";
-            this.PBImagen.Size = new System.Drawing.Size(260, 193);
-            this.PBImagen.TabIndex = 1;
-            this.PBImagen.TabStop = false;
             // 
             // componenteRojoToolStripMenuItem
             // 
             this.componenteRojoToolStripMenuItem.Name = "componenteRojoToolStripMenuItem";
-            this.componenteRojoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.componenteRojoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.componenteRojoToolStripMenuItem.Text = "Componente Rojo";
             this.componenteRojoToolStripMenuItem.Click += new System.EventHandler(this.componenteRojoToolStripMenuItem_Click);
             // 
@@ -153,11 +136,37 @@
             this.componenteAzulToolStripMenuItem.Text = "Componente Azul";
             this.componenteAzulToolStripMenuItem.Click += new System.EventHandler(this.componenteAzulToolStripMenuItem_Click);
             // 
+            // OFIMagen
+            // 
+            this.OFIMagen.FileName = "openFileDialog1";
+            // 
+            // SFImagen
+            // 
+            this.SFImagen.Filter = "\"mapas de bits|*.bmp|jpeges|*.jpg\"";
+            // 
+            // PBImagen
+            // 
+            this.PBImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PBImagen.Location = new System.Drawing.Point(12, 27);
+            this.PBImagen.Name = "PBImagen";
+            this.PBImagen.Size = new System.Drawing.Size(628, 443);
+            this.PBImagen.TabIndex = 1;
+            this.PBImagen.TabStop = false;
+            // 
+            // clasificacionToolStripMenuItem
+            // 
+            this.clasificacionToolStripMenuItem.Name = "clasificacionToolStripMenuItem";
+            this.clasificacionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.clasificacionToolStripMenuItem.Text = "Clasificacion";
+            this.clasificacionToolStripMenuItem.Click += new System.EventHandler(this.clasificacionToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(652, 482);
             this.Controls.Add(this.PBImagen);
             this.Controls.Add(this.MSPrincipal);
             this.MainMenuStrip = this.MSPrincipal;
@@ -187,6 +196,7 @@
         private System.Windows.Forms.ToolStripMenuItem componenteRojoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componenteVerdeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componenteAzulToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clasificacionToolStripMenuItem;
     }
 }
 

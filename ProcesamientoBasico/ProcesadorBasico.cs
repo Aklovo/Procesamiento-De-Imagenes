@@ -30,22 +30,28 @@ namespace ProcesamientoBasico
         public ProcesadorBasico(Bitmap mapa)
         {
             this.mapa = mapa;
+            Width = mapa.Size.Width;
+            Height = mapa.Size.Height;
+        }
+
+        public void setMapa(Bitmap mapa)
+        {
+            this.mapa = mapa;
+            Width = mapa.Size.Width;
+            Height = mapa.Size.Height;
         }
 
         public void descomponerRGB()
         {
             int mascaraR = 0xFF0000;
             int mascaraG = 0xFF00;
-            int mascaraB = 0xFF;
-            Width = mapa.Size.Width;
-            Height = mapa.Size.Height;
+            int mascaraB = 0xFF; 
 
             R = new int[Width * Height];
             G = new int[Width * Height];
             B = new int[Width * Height];
 
             int color;
-
             for (int j = 0; j < Height; j++)
                 for (int i = 0; i < Width; i++)
                 {
