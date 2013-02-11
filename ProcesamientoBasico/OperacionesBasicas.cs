@@ -168,15 +168,6 @@ namespace ProcesamientoBasico
 
             Dictionary<int,int> colores = new Dictionary<int, int>();
             
-            int[] coloresRGB = new int[7];
-            coloresRGB[0] = 0x8A2BE2; // Violet
-            coloresRGB[1] = 0x0000FF; // Blue
-            coloresRGB[2] = 0x00FF00; // Green
-            coloresRGB[3] = 0xFF0000; // Red
-            coloresRGB[4] = 0xFF8C00; // Orange
-            coloresRGB[5] = 0XFF1493; // Pink
-            coloresRGB[6] = 0xFFFFFF; // White
-
             for (int j = 0; j < Height; j++)
             {
                 for (int i = 0; i < Width; i++)
@@ -186,17 +177,12 @@ namespace ProcesamientoBasico
 
                     if (VectorColores[actual] != -1 && !colores.TryGetValue(VectorColores[actual], out value)) 
                     {
-                        colores[VectorColores[actual]] = 0;
+                        colores[VectorColores[actual]] = VectorColores[actual] * 100000;
                     }
                 }
             }
 
-            for (int index = 0; index < colores.Count; index++)
-            {
-                colores[colores.ElementAt(index).Key]= coloresRGB[index%6];
-            }
-
-            colores[-1] = coloresRGB[6];
+            colores[-1] = 0xFFFFFF;
 
             RGB = new int[Width * Height];
 
