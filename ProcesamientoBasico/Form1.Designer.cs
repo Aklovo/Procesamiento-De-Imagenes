@@ -39,10 +39,11 @@
             this.componenteRojoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componenteVerdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componenteAzulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clasificacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.objetosBinariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
             this.SFImagen = new System.Windows.Forms.SaveFileDialog();
             this.PBImagen = new System.Windows.Forms.PictureBox();
-            this.clasificacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
             this.SuspendLayout();
@@ -70,15 +71,16 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
+            this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // operacionesBasicasToolStripMenuItem
             // 
@@ -89,7 +91,8 @@
             this.componenteRojoToolStripMenuItem,
             this.componenteVerdeToolStripMenuItem,
             this.componenteAzulToolStripMenuItem,
-            this.clasificacionToolStripMenuItem});
+            this.clasificacionToolStripMenuItem,
+            this.objetosBinariosToolStripMenuItem});
             this.operacionesBasicasToolStripMenuItem.Name = "operacionesBasicasToolStripMenuItem";
             this.operacionesBasicasToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.operacionesBasicasToolStripMenuItem.Text = "Operaciones Basicas";
@@ -136,6 +139,20 @@
             this.componenteAzulToolStripMenuItem.Text = "Componente Azul";
             this.componenteAzulToolStripMenuItem.Click += new System.EventHandler(this.componenteAzulToolStripMenuItem_Click);
             // 
+            // clasificacionToolStripMenuItem
+            // 
+            this.clasificacionToolStripMenuItem.Name = "clasificacionToolStripMenuItem";
+            this.clasificacionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.clasificacionToolStripMenuItem.Text = "Segmentacion";
+            this.clasificacionToolStripMenuItem.Click += new System.EventHandler(this.clasificacionToolStripMenuItem_Click);
+            // 
+            // objetosBinariosToolStripMenuItem
+            // 
+            this.objetosBinariosToolStripMenuItem.Name = "objetosBinariosToolStripMenuItem";
+            this.objetosBinariosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.objetosBinariosToolStripMenuItem.Text = "Objetos Binarios";
+            this.objetosBinariosToolStripMenuItem.Click += new System.EventHandler(this.objetosBinariosToolStripMenuItem_Click);
+            // 
             // OFIMagen
             // 
             this.OFIMagen.FileName = "openFileDialog1";
@@ -154,13 +171,6 @@
             this.PBImagen.Size = new System.Drawing.Size(628, 443);
             this.PBImagen.TabIndex = 1;
             this.PBImagen.TabStop = false;
-            // 
-            // clasificacionToolStripMenuItem
-            // 
-            this.clasificacionToolStripMenuItem.Name = "clasificacionToolStripMenuItem";
-            this.clasificacionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.clasificacionToolStripMenuItem.Text = "Clasificacion";
-            this.clasificacionToolStripMenuItem.Click += new System.EventHandler(this.clasificacionToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -197,6 +207,7 @@
         private System.Windows.Forms.ToolStripMenuItem componenteVerdeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componenteAzulToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clasificacionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem;
     }
 }
 

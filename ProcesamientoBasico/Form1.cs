@@ -77,16 +77,38 @@ namespace ProcesamientoBasico
 
         private void clasificacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.binarizacion(125);
             ob.componerRGB();
             PBImagen.Image = ob.getMapa();
 
             ob.setMapa((Bitmap)this.PBImagen.Image);
-            ob.clasificacion();
+            ob.segmentacion();
 
             PBImagen.Image = ob.getMapa();
+        }
+
+        private void objetosBinariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            ob.descomponerRGB();
+            ob.binarizacion(125);
+            ob.componerRGB();
+            PBImagen.Image = ob.getMapa();
+
+
+            ob.setMapa((Bitmap)this.PBImagen.Image);
+            ob.generarObjetosBinarios();
+            
+            PBImagen.Image = ob.getMapa();
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            Bitmap bmp1 = new Bitmap((Bitmap)this.PBImagen.Image);
+            bmp1.Save("TEST.gif", System.Drawing.Imaging.ImageFormat.Gif);
         }
     }
 }
