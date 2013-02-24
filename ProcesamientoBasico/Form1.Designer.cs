@@ -41,9 +41,11 @@
             this.componenteAzulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clasificacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objetosBinariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bordeHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
             this.SFImagen = new System.Windows.Forms.SaveFileDialog();
             this.PBImagen = new System.Windows.Forms.PictureBox();
+            this.bordeVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
             this.SuspendLayout();
@@ -71,14 +73,14 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
@@ -92,7 +94,9 @@
             this.componenteVerdeToolStripMenuItem,
             this.componenteAzulToolStripMenuItem,
             this.clasificacionToolStripMenuItem,
-            this.objetosBinariosToolStripMenuItem});
+            this.objetosBinariosToolStripMenuItem,
+            this.bordeHorizontalToolStripMenuItem,
+            this.bordeVerticalToolStripMenuItem});
             this.operacionesBasicasToolStripMenuItem.Name = "operacionesBasicasToolStripMenuItem";
             this.operacionesBasicasToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.operacionesBasicasToolStripMenuItem.Text = "Operaciones Basicas";
@@ -153,6 +157,13 @@
             this.objetosBinariosToolStripMenuItem.Text = "Objetos Binarios";
             this.objetosBinariosToolStripMenuItem.Click += new System.EventHandler(this.objetosBinariosToolStripMenuItem_Click);
             // 
+            // bordeHorizontalToolStripMenuItem
+            // 
+            this.bordeHorizontalToolStripMenuItem.Name = "bordeHorizontalToolStripMenuItem";
+            this.bordeHorizontalToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.bordeHorizontalToolStripMenuItem.Text = "Borde Horizontal";
+            this.bordeHorizontalToolStripMenuItem.Click += new System.EventHandler(this.bordeHorizontalToolStripMenuItem_Click);
+            // 
             // OFIMagen
             // 
             this.OFIMagen.FileName = "openFileDialog1";
@@ -171,6 +182,13 @@
             this.PBImagen.Size = new System.Drawing.Size(628, 443);
             this.PBImagen.TabIndex = 1;
             this.PBImagen.TabStop = false;
+            // 
+            // bordeVerticalToolStripMenuItem
+            // 
+            this.bordeVerticalToolStripMenuItem.Name = "bordeVerticalToolStripMenuItem";
+            this.bordeVerticalToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.bordeVerticalToolStripMenuItem.Text = "Borde Vertical";
+            this.bordeVerticalToolStripMenuItem.Click += new System.EventHandler(this.bordeVerticalToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -208,6 +226,8 @@
         private System.Windows.Forms.ToolStripMenuItem componenteAzulToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clasificacionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bordeHorizontalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bordeVerticalToolStripMenuItem;
     }
 }
 

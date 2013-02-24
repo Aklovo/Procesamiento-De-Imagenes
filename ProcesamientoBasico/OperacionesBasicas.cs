@@ -101,6 +101,48 @@ namespace ProcesamientoBasico
             }
         }
 
+
+        public void bordeHorizontal()
+        {
+            RGB = new int[Width * Height];
+            int it = 0, pixel = 0;
+
+            for (int j = 0; j < Height; j++)
+            {
+               
+                for (int i = 0; i < Width-1; i++)
+                {
+                    it = j * Width + i;
+                    pixel = 255 - Math.Abs(R[it] - R[it + 1]);
+                    pixel = pixel > 220 ? 255 : 0;
+                    RGB[it] = (0xff << 24) | (pixel << 16) | (pixel << 8) | pixel;
+                }
+
+                ++it;
+                RGB[it] = RGB[it - 1];
+            }
+        }
+
+        internal void bordeVertical()
+        {
+            RGB = new int[Width * Height];
+            int it = 0, pixel = 0;
+
+            for (int j = 0; j < Width; j++)
+            {
+
+                for (int i = 0; i < Height - 1; i++)
+                {
+                    it = i * Width + j;
+                    pixel = 255 - Math.Abs(R[it] - R[it + Width]);
+                    pixel = pixel > 220 ? 255 : 0;
+                    RGB[it] = (0xff << 24) | (pixel << 16) | (pixel << 8) | pixel;
+                }
+
+                ++it;
+                RGB[it] = RGB[it - Width];
+            }
+        }
     }
 
 }

@@ -81,9 +81,7 @@ namespace ProcesamientoBasico
             ob.descomponerRGB();
             ob.binarizacion(125);
             ob.componerRGB();
-            PBImagen.Image = ob.getMapa();
-
-            ob.setMapa((Bitmap)this.PBImagen.Image);
+            ob.setMapa(ob.getMapa());
             ob.segmentacion();
 
             PBImagen.Image = ob.getMapa();
@@ -91,14 +89,19 @@ namespace ProcesamientoBasico
 
         private void objetosBinariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+
+            ob.descomponerRGB();
+            ob.escalaDeGrises();
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+
             ob.descomponerRGB();
             ob.binarizacion(125);
             ob.componerRGB();
-            PBImagen.Image = ob.getMapa();
+            ob.setMapa(ob.getMapa());
 
-
-            ob.setMapa((Bitmap)this.PBImagen.Image);
             ob.generarObjetosBinarios();
             
             PBImagen.Image = ob.getMapa();
@@ -109,6 +112,28 @@ namespace ProcesamientoBasico
 
             Bitmap bmp1 = new Bitmap((Bitmap)this.PBImagen.Image);
             bmp1.Save("TEST.gif", System.Drawing.Imaging.ImageFormat.Gif);
+        }
+
+        private void bordeHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+
+            ob.descomponerRGB();
+            ob.escalaDeGrises();
+            ob.bordeHorizontal();
+
+            PBImagen.Image = ob.getMapa();
+        }
+
+        private void bordeVerticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+
+            ob.descomponerRGB();
+            ob.escalaDeGrises();
+            ob.bordeVertical();
+
+            PBImagen.Image = ob.getMapa();
         }
     }
 }
