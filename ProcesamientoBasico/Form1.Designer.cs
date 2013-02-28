@@ -42,10 +42,11 @@
             this.clasificacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objetosBinariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bordeHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bordeVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
             this.SFImagen = new System.Windows.Forms.SaveFileDialog();
             this.PBImagen = new System.Windows.Forms.PictureBox();
-            this.bordeVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtroRobertsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
             this.SuspendLayout();
@@ -96,7 +97,8 @@
             this.clasificacionToolStripMenuItem,
             this.objetosBinariosToolStripMenuItem,
             this.bordeHorizontalToolStripMenuItem,
-            this.bordeVerticalToolStripMenuItem});
+            this.bordeVerticalToolStripMenuItem,
+            this.filtroRobertsToolStripMenuItem});
             this.operacionesBasicasToolStripMenuItem.Name = "operacionesBasicasToolStripMenuItem";
             this.operacionesBasicasToolStripMenuItem.Size = new System.Drawing.Size(126, 20);
             this.operacionesBasicasToolStripMenuItem.Text = "Operaciones Basicas";
@@ -164,6 +166,13 @@
             this.bordeHorizontalToolStripMenuItem.Text = "Borde Horizontal";
             this.bordeHorizontalToolStripMenuItem.Click += new System.EventHandler(this.bordeHorizontalToolStripMenuItem_Click);
             // 
+            // bordeVerticalToolStripMenuItem
+            // 
+            this.bordeVerticalToolStripMenuItem.Name = "bordeVerticalToolStripMenuItem";
+            this.bordeVerticalToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.bordeVerticalToolStripMenuItem.Text = "Borde Vertical";
+            this.bordeVerticalToolStripMenuItem.Click += new System.EventHandler(this.bordeVerticalToolStripMenuItem_Click);
+            // 
             // OFIMagen
             // 
             this.OFIMagen.FileName = "openFileDialog1";
@@ -180,15 +189,16 @@
             this.PBImagen.Location = new System.Drawing.Point(12, 27);
             this.PBImagen.Name = "PBImagen";
             this.PBImagen.Size = new System.Drawing.Size(628, 443);
+            this.PBImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PBImagen.TabIndex = 1;
             this.PBImagen.TabStop = false;
             // 
-            // bordeVerticalToolStripMenuItem
+            // filtroRobertsToolStripMenuItem
             // 
-            this.bordeVerticalToolStripMenuItem.Name = "bordeVerticalToolStripMenuItem";
-            this.bordeVerticalToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.bordeVerticalToolStripMenuItem.Text = "Borde Vertical";
-            this.bordeVerticalToolStripMenuItem.Click += new System.EventHandler(this.bordeVerticalToolStripMenuItem_Click);
+            this.filtroRobertsToolStripMenuItem.Name = "filtroRobertsToolStripMenuItem";
+            this.filtroRobertsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.filtroRobertsToolStripMenuItem.Text = "Filtro Roberts";
+            this.filtroRobertsToolStripMenuItem.Click += new System.EventHandler(this.filtroRobertsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -228,6 +238,7 @@
         private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bordeHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bordeVerticalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem filtroRobertsToolStripMenuItem;
     }
 }
 

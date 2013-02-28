@@ -135,5 +135,16 @@ namespace ProcesamientoBasico
 
             PBImagen.Image = ob.getMapa();
         }
+
+        private void filtroRobertsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+
+            ob.descomponerRGB();
+            ob.escalaDeGrises();
+            ob.filtroRoberts();
+
+            PBImagen.Image = ob.getMapa();
+        }
     }
 }

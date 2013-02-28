@@ -109,12 +109,10 @@ namespace ProcesamientoBasico
 
             for (int j = 0; j < Height; j++)
             {
-               
                 for (int i = 0; i < Width-1; i++)
                 {
                     it = j * Width + i;
-                    pixel = 255 - Math.Abs(R[it] - R[it + 1]);
-                    pixel = pixel > 220 ? 255 : 0;
+                    pixel = Math.Abs(R[it] - R[it + 1]);
                     RGB[it] = (0xff << 24) | (pixel << 16) | (pixel << 8) | pixel;
                 }
 
@@ -123,24 +121,42 @@ namespace ProcesamientoBasico
             }
         }
 
-        internal void bordeVertical()
+        public void bordeVertical()
         {
             RGB = new int[Width * Height];
             int it = 0, pixel = 0;
 
-            for (int j = 0; j < Width; j++)
+            for (int j = 0; j < Height - 1; j++)
             {
-
-                for (int i = 0; i < Height - 1; i++)
+                for (int i = 0; i < Width; i++)
                 {
-                    it = i * Width + j;
-                    pixel = 255 - Math.Abs(R[it] - R[it + Width]);
-                    pixel = pixel > 220 ? 255 : 0;
+                    it = j * Width + i;
+                    pixel = Math.Abs(R[it] - R[it + Width]);
                     RGB[it] = (0xff << 24) | (pixel << 16) | (pixel << 8) | pixel;
                 }
 
                 ++it;
                 RGB[it] = RGB[it - Width];
+            }
+        }
+
+        public void filtroRoberts()
+        {
+            RGB = new int[Width * Height];
+            int it = 0, pixel = 0, pixelDer = 0, pixelAb = 0;
+
+            for (int j = 0; j < Height - 1; j++)
+            {
+                for (int i = 0; i < Width - 1; i++)
+                {
+                    it = j * Width + i;
+                    pixelDer = Math.Abs(R[it] - R[it + 1]);
+                    pixelAb = Math.Abs(R[it] - R[it + Width]);
+
+                    pixel = (int)Math.Sqrt(Math.Pow(pixelDer, 2) + Math.Pow(pixelAb, 2));
+
+                    RGB[it] = (0xff << 24) | (pixel << 16) | (pixel << 8) | pixel;
+                }
             }
         }
     }

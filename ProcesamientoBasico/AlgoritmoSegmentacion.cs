@@ -76,6 +76,8 @@ namespace ProcesamientoBasico
                         objetoBinario.Value.Pixeles[ptr++]  = VectorColores[it];
                     }
                 }
+
+                objetoBinario.Value.CalcularCentroDeMasa();
                 
             }
 
@@ -99,8 +101,8 @@ namespace ProcesamientoBasico
                 pixeles = objetos.Value.Pixeles;
 
                 Bitmap mapa = new Bitmap(anchura, altura, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
                 for (int j = 0; j < altura; j++)
-                {
                     for (int i = 0; i < anchura; i++)
                     {
 
@@ -114,7 +116,6 @@ namespace ProcesamientoBasico
                         mapa.SetPixel(i, j, Color.FromArgb(rgb));
                         mapa.Save(@"\\vmware-host\Shared Folders\Pictures\Objetos\" + objetos.Key + ".gif", System.Drawing.Imaging.ImageFormat.Gif);
                     }
-                }
 
             }
         }
@@ -122,17 +123,13 @@ namespace ProcesamientoBasico
         public void generarMapas()
         {
             Boolean foundChange = true;
-
+            int numero = 0;
             while (foundChange)
             {
                 foundChange = false;
 
                 for (int j = 0; j < Height; j++)
-                {
                     for (int i = 0; i < Width; i++)
-                    {
-                        int numero;
-
                         if (VectorColores[j * Width + i] != -1)
                         {
                             numero = verificarPixelesAlrededor(j * Width + i, VectorColores[j * Width + i]);
@@ -145,8 +142,6 @@ namespace ProcesamientoBasico
 
                         }
 
-                    }
-                }
             }
         }
 
@@ -154,7 +149,6 @@ namespace ProcesamientoBasico
         {
 
             for (int j = 0; j < Height; j++)
-            {
                 for (int i = 0; i < Width; i++)
                 {
                     int actual = j * Width + i;
@@ -163,8 +157,7 @@ namespace ProcesamientoBasico
                     if (VectorColores[actual] != -1 && !colores.TryGetValue(VectorColores[actual], out value)) 
                         colores[VectorColores[actual]] = VectorColores[actual] * 100000;
                 }
-            }
-
+            
             colores[-1] = 0xFFFFFF;
 
             RGB = new int[Width * Height];

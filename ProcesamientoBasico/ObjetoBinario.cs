@@ -14,6 +14,7 @@ namespace ProcesamientoBasico
         public Cordenada Cordenadas { get; set; }
         public Cordenada CordenadasInferior { get; set; }
         public int Etiqueta { get; set; }
+        public Cordenada CentroDeMasa{ get; set; }
 
         public ObjetoBinario(int etiqueta, int x, int y)
         {
@@ -36,6 +37,27 @@ namespace ProcesamientoBasico
         {
             Anchura = CordenadasInferior.PosX - Cordenadas.PosX + 1;
             Altura = CordenadasInferior.PosY - Cordenadas.PosY + 1;
+        }
+
+        public void CalcularCentroDeMasa() 
+        {
+            
+            int sumaX = 0, x = 0;
+            int sumaY = 0, y = 0;
+
+            for (int j = 0; j < Altura; j++)
+                for (int i = 0; i < Anchura; i++)
+                    if (Pixeles[j * Anchura + i] != -1)
+                    {
+                        sumaY += j;
+                        sumaX += i;
+                        x++;
+                        y++;
+                    }
+
+            CentroDeMasa = new Cordenada( (int)Math.Round( (float)sumaX / (float)x) ,  (int)Math.Round( (float)sumaY / (float)y) );
+
+            Console.WriteLine( CentroDeMasa.PosX + " " + CentroDeMasa.PosY);
         }
 
         override public String ToString() 
