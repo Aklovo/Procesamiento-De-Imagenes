@@ -34,6 +34,31 @@ namespace ProcesamientoBasico
             Height = mapa.Size.Height;
         }
 
+        public ProcesadorBasico(int Width,int Height, int[] array)
+        {
+            this.Width = Width;
+            this.Height = Height;
+
+            RGB = new int[Width * Height];
+
+            int mascaraR = 0xFF0000;
+            int mascaraG = 0xFF00;
+            int mascaraB = 0xFF;
+
+            for (int j = 0; j < Height; j++)
+                for (int i = 0; i < Width; i++)
+                {
+
+                    int it = j * Width + i;
+                    int color = array[it] != -1? 0 : -1;
+                    int R = (color & mascaraR) >> 16;
+                    int G = (color & mascaraG) >> 8;
+                    int B = (color & mascaraB);
+
+                    RGB[it] = (0xff << 24) | (R << 16) | (G << 8) | B;
+                }    
+        }
+
         public void setMapa(Bitmap mapa)
         {
             this.mapa = mapa;

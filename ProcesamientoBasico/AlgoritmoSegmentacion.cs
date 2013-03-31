@@ -40,7 +40,7 @@ namespace ProcesamientoBasico
             colorearMapas();
         }
 
-        public void generarObjetosBinarios()
+        public Dictionary<int, ObjetoBinario> generarObjetosBinarios()
         {
             segmentacion();
 
@@ -81,9 +81,7 @@ namespace ProcesamientoBasico
                 
             }
 
-            imprimirObjetos();
-            
-
+            return ObjetosBinarios;
         }
 
         public void imprimirObjetos()

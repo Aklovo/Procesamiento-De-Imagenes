@@ -39,14 +39,16 @@
             this.componenteRojoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componenteVerdeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.componenteAzulToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clasificacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.objetosBinariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bordeHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bordeVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.filtroRobertsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
             this.SFImagen = new System.Windows.Forms.SaveFileDialog();
             this.PBImagen = new System.Windows.Forms.PictureBox();
-            this.filtroRobertsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.segmentacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.segmentacionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.objetosBinariosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.distanciaTinamotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
             this.SuspendLayout();
@@ -55,7 +57,8 @@
             // 
             this.MSPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.operacionesBasicasToolStripMenuItem});
+            this.operacionesBasicasToolStripMenuItem,
+            this.segmentacionToolStripMenuItem});
             this.MSPrincipal.Location = new System.Drawing.Point(0, 0);
             this.MSPrincipal.Name = "MSPrincipal";
             this.MSPrincipal.Size = new System.Drawing.Size(652, 24);
@@ -94,8 +97,6 @@
             this.componenteRojoToolStripMenuItem,
             this.componenteVerdeToolStripMenuItem,
             this.componenteAzulToolStripMenuItem,
-            this.clasificacionToolStripMenuItem,
-            this.objetosBinariosToolStripMenuItem,
             this.bordeHorizontalToolStripMenuItem,
             this.bordeVerticalToolStripMenuItem,
             this.filtroRobertsToolStripMenuItem});
@@ -145,20 +146,6 @@
             this.componenteAzulToolStripMenuItem.Text = "Componente Azul";
             this.componenteAzulToolStripMenuItem.Click += new System.EventHandler(this.componenteAzulToolStripMenuItem_Click);
             // 
-            // clasificacionToolStripMenuItem
-            // 
-            this.clasificacionToolStripMenuItem.Name = "clasificacionToolStripMenuItem";
-            this.clasificacionToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.clasificacionToolStripMenuItem.Text = "Segmentacion";
-            this.clasificacionToolStripMenuItem.Click += new System.EventHandler(this.clasificacionToolStripMenuItem_Click);
-            // 
-            // objetosBinariosToolStripMenuItem
-            // 
-            this.objetosBinariosToolStripMenuItem.Name = "objetosBinariosToolStripMenuItem";
-            this.objetosBinariosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.objetosBinariosToolStripMenuItem.Text = "Objetos Binarios";
-            this.objetosBinariosToolStripMenuItem.Click += new System.EventHandler(this.objetosBinariosToolStripMenuItem_Click);
-            // 
             // bordeHorizontalToolStripMenuItem
             // 
             this.bordeHorizontalToolStripMenuItem.Name = "bordeHorizontalToolStripMenuItem";
@@ -172,6 +159,13 @@
             this.bordeVerticalToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.bordeVerticalToolStripMenuItem.Text = "Borde Vertical";
             this.bordeVerticalToolStripMenuItem.Click += new System.EventHandler(this.bordeVerticalToolStripMenuItem_Click);
+            // 
+            // filtroRobertsToolStripMenuItem
+            // 
+            this.filtroRobertsToolStripMenuItem.Name = "filtroRobertsToolStripMenuItem";
+            this.filtroRobertsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.filtroRobertsToolStripMenuItem.Text = "Filtro Roberts";
+            this.filtroRobertsToolStripMenuItem.Click += new System.EventHandler(this.filtroRobertsToolStripMenuItem_Click);
             // 
             // OFIMagen
             // 
@@ -193,12 +187,36 @@
             this.PBImagen.TabIndex = 1;
             this.PBImagen.TabStop = false;
             // 
-            // filtroRobertsToolStripMenuItem
+            // segmentacionToolStripMenuItem
             // 
-            this.filtroRobertsToolStripMenuItem.Name = "filtroRobertsToolStripMenuItem";
-            this.filtroRobertsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.filtroRobertsToolStripMenuItem.Text = "Filtro Roberts";
-            this.filtroRobertsToolStripMenuItem.Click += new System.EventHandler(this.filtroRobertsToolStripMenuItem_Click);
+            this.segmentacionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.segmentacionToolStripMenuItem1,
+            this.objetosBinariosToolStripMenuItem1,
+            this.distanciaTinamotoToolStripMenuItem});
+            this.segmentacionToolStripMenuItem.Name = "segmentacionToolStripMenuItem";
+            this.segmentacionToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.segmentacionToolStripMenuItem.Text = "Segmentacion";
+            // 
+            // segmentacionToolStripMenuItem1
+            // 
+            this.segmentacionToolStripMenuItem1.Name = "segmentacionToolStripMenuItem1";
+            this.segmentacionToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
+            this.segmentacionToolStripMenuItem1.Text = "Segmentacion";
+            this.segmentacionToolStripMenuItem1.Click += new System.EventHandler(this.segmentacionToolStripMenuItem1_Click);
+            // 
+            // objetosBinariosToolStripMenuItem1
+            // 
+            this.objetosBinariosToolStripMenuItem1.Name = "objetosBinariosToolStripMenuItem1";
+            this.objetosBinariosToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
+            this.objetosBinariosToolStripMenuItem1.Text = "Objetos Binarios";
+            this.objetosBinariosToolStripMenuItem1.Click += new System.EventHandler(this.objetosBinariosToolStripMenuItem1_Click);
+            // 
+            // distanciaTinamotoToolStripMenuItem
+            // 
+            this.distanciaTinamotoToolStripMenuItem.Name = "distanciaTinamotoToolStripMenuItem";
+            this.distanciaTinamotoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.distanciaTinamotoToolStripMenuItem.Text = "Distancia Tinamoto";
+            this.distanciaTinamotoToolStripMenuItem.Click += new System.EventHandler(this.distanciaTinamotoToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -234,11 +252,13 @@
         private System.Windows.Forms.ToolStripMenuItem componenteRojoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componenteVerdeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem componenteAzulToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clasificacionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bordeHorizontalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bordeVerticalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filtroRobertsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem segmentacionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem segmentacionToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem distanciaTinamotoToolStripMenuItem;
     }
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcesamientoBasico
 {
-    class Cordenada
+    public class Cordenada
     {
         public int PosX { get; set; }
         public int PosY { get; set; }

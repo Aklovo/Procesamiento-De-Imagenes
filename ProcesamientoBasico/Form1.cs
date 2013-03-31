@@ -109,7 +109,7 @@ namespace ProcesamientoBasico
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
             Bitmap bmp1 = new Bitmap((Bitmap)this.PBImagen.Image);
             bmp1.Save("TEST.gif", System.Drawing.Imaging.ImageFormat.Gif);
         }
@@ -144,6 +144,59 @@ namespace ProcesamientoBasico
             ob.escalaDeGrises();
             ob.filtroRoberts();
 
+            PBImagen.Image = ob.getMapa();
+        }
+
+        private void segmentacionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            ob.descomponerRGB();
+            ob.binarizacion(125);
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+            ob.segmentacion();
+
+            PBImagen.Image = ob.getMapa();
+        }
+
+        private void distanciaTinamotoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+
+            ob.descomponerRGB();
+            ob.escalaDeGrises();
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+            
+            ob.descomponerRGB();
+            ob.binarizacion(125);
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+            Dictionary<int, ObjetoBinario> objetos = ob.generarObjetosBinarios();
+            PBImagen.Image = ob.getMapa();
+
+            Tanimoto tanimoto = new Tanimoto(objetos);
+            tanimoto.Show();
+        }
+
+        private void objetosBinariosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+
+            ob.descomponerRGB();
+            ob.escalaDeGrises();
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+
+            ob.descomponerRGB();
+            ob.binarizacion(125);
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+
+            ob.generarObjetosBinarios();
+            ob.imprimirObjetos();
             PBImagen.Image = ob.getMapa();
         }
     }
