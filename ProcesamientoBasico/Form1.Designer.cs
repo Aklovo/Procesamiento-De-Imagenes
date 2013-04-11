@@ -42,13 +42,14 @@
             this.bordeHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bordeVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filtroRobertsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
-            this.SFImagen = new System.Windows.Forms.SaveFileDialog();
-            this.PBImagen = new System.Windows.Forms.PictureBox();
             this.segmentacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.segmentacionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.objetosBinariosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.distanciaTinamotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
+            this.SFImagen = new System.Windows.Forms.SaveFileDialog();
+            this.PBImagen = new System.Windows.Forms.PictureBox();
+            this.placasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +59,8 @@
             this.MSPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.operacionesBasicasToolStripMenuItem,
-            this.segmentacionToolStripMenuItem});
+            this.segmentacionToolStripMenuItem,
+            this.placasToolStripMenuItem});
             this.MSPrincipal.Location = new System.Drawing.Point(0, 0);
             this.MSPrincipal.Name = "MSPrincipal";
             this.MSPrincipal.Size = new System.Drawing.Size(652, 24);
@@ -167,26 +169,6 @@
             this.filtroRobertsToolStripMenuItem.Text = "Filtro Roberts";
             this.filtroRobertsToolStripMenuItem.Click += new System.EventHandler(this.filtroRobertsToolStripMenuItem_Click);
             // 
-            // OFIMagen
-            // 
-            this.OFIMagen.FileName = "openFileDialog1";
-            // 
-            // SFImagen
-            // 
-            this.SFImagen.Filter = "\"mapas de bits|*.bmp|jpeges|*.jpg\"";
-            // 
-            // PBImagen
-            // 
-            this.PBImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.PBImagen.Location = new System.Drawing.Point(12, 27);
-            this.PBImagen.Name = "PBImagen";
-            this.PBImagen.Size = new System.Drawing.Size(628, 443);
-            this.PBImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PBImagen.TabIndex = 1;
-            this.PBImagen.TabStop = false;
-            // 
             // segmentacionToolStripMenuItem
             // 
             this.segmentacionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -217,6 +199,33 @@
             this.distanciaTinamotoToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.distanciaTinamotoToolStripMenuItem.Text = "Distancia Tinamoto";
             this.distanciaTinamotoToolStripMenuItem.Click += new System.EventHandler(this.distanciaTinamotoToolStripMenuItem_Click);
+            // 
+            // OFIMagen
+            // 
+            this.OFIMagen.FileName = "openFileDialog1";
+            // 
+            // SFImagen
+            // 
+            this.SFImagen.Filter = "\"mapas de bits|*.bmp|jpeges|*.jpg\"";
+            // 
+            // PBImagen
+            // 
+            this.PBImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PBImagen.Location = new System.Drawing.Point(12, 27);
+            this.PBImagen.Name = "PBImagen";
+            this.PBImagen.Size = new System.Drawing.Size(628, 443);
+            this.PBImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PBImagen.TabIndex = 1;
+            this.PBImagen.TabStop = false;
+            // 
+            // placasToolStripMenuItem
+            // 
+            this.placasToolStripMenuItem.Name = "placasToolStripMenuItem";
+            this.placasToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.placasToolStripMenuItem.Text = "Obtener Placas";
+            this.placasToolStripMenuItem.Click += new System.EventHandler(this.placasToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -259,6 +268,7 @@
         private System.Windows.Forms.ToolStripMenuItem segmentacionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem distanciaTinamotoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem placasToolStripMenuItem;
     }
 }
 
