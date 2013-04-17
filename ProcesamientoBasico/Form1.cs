@@ -202,22 +202,8 @@ namespace ProcesamientoBasico
 
         private void placasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
-
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-
-            ob.descomponerRGB();
-            ob.binarizacion(83);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            Dictionary<int, ObjetoBinario> objetos = ob.generarObjetosBinarios();
-            PBImagen.Image = ob.getMapa();
-
-            Tanimoto tanimoto = new Tanimoto(objetos);
-            MessageBox.Show(tanimoto.obtenerPlacas());
+            Placas placas = new Placas();
+            placas.Show();
         }
     }
 }

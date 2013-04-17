@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,12 @@
     </Compile>
     <Compile Include="ObjetoBinario.cs" />
     <Compile Include="OperacionesBasicas.cs" />
+    <Compile Include="Placas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Placas.Designer.cs">
+      <DependentUpon>Placas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcesadorBasico.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +72,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Placas.resx">
+      <DependentUpon>Placas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

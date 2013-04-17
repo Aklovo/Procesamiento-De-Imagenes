@@ -7,21 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace ProcesamientoBasico
 {
     public partial class Tanimoto : Form
     {
         public Dictionary<int, ObjetoBinario> ObjetosBinarios = new Dictionary<int,ObjetoBinario>();
-        public Dictionary<int, ObjetoBinario> ObjetosPatrones = new Dictionary<int, ObjetoBinario>();
+        public static Dictionary<int, ObjetoBinario> ObjetosPatrones = new Dictionary<int, ObjetoBinario>();
         public Dictionary<int,ObjetoBinario> ObjetosPlaca = new Dictionary<int, ObjetoBinario>();
 
-        String[] NombrePatrones = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", 
+        static String[] NombrePatrones = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", 
                                   "g", "h", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "u", "v", "x", "y", "z"};
 
         private bool flag1 = false;
         private bool flag2 = false;
+        private static bool isSet = false;
 
         ObjetoBinario Objeto1 = new ObjetoBinario();
         ObjetoBinario Objeto2 = new ObjetoBinario();
@@ -40,20 +40,35 @@ namespace ProcesamientoBasico
                 Altura = Objeto1.Altura;
                 Anchura = Objeto1.Anchura;
 
-                if (Altura > 110 || Altura < 25 || Anchura > 50 || Anchura < 10)
+                if (Altura > 110 || Altura < 15 || Anchura > 50 || Anchura < 5)
                     continue;
 
                 ObjetosPlaca.Add(Objeto1.Cordenadas.PosX,Objeto1);
                 comboBox1.Items.Add(x);
             }
 
-            foreach(String nombre in NombrePatrones){
-                String ruta = @"\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ProcesamientoBasico\ProcesamientoBasico\Imagenes\Patrones\" + nombre + ".bmp";
-                Bitmap map = new Bitmap(ruta);
-                ObjetosPatrones[(int)nombre[0]] = new ObjetoBinario(map, (int)nombre[0]);
-                ObjetosPatrones[(int)nombre[0]].CalcularCentroDeMasa();
+            setPatrones();
+
+            foreach (String nombre in NombrePatrones)
+            {
                 comboBox2.Items.Add(nombre);
             }
+        }
+
+        static private Dictionary<int, ObjetoBinario> setPatrones()
+        {
+            if (isSet == false)
+            {
+                foreach (String nombre in NombrePatrones)
+                {
+                    String ruta = @"\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ProcesamientoBasico\ProcesamientoBasico\Imagenes\Patrones\" + nombre + ".bmp";
+                    Bitmap map = new Bitmap(ruta);
+                    ObjetosPatrones[(int)nombre[0]] = new ObjetoBinario(map, (int)nombre[0]);
+                    ObjetosPatrones[(int)nombre[0]].CalcularCentroDeMasa();
+                }
+            }
+
+            return ObjetosPatrones;
         }
 
 
@@ -62,6 +77,9 @@ namespace ProcesamientoBasico
 
             Objeto1 = ObjetosBinarios[Convert.ToInt32(comboBox1.Text.ToString())];
             flag1 = true;
+
+
+            Console.WriteLine(Objeto1.Altura + " " + Objeto1.Anchura);
 
             if (flag2)
             {
@@ -118,6 +136,10 @@ namespace ProcesamientoBasico
             if (flag1)
             {
                 Objeto1 = escalar(Objeto1, Objeto2.Altura, Objeto2.Anchura);
+
+                ProcesadorBasico proc = new ProcesadorBasico(Objeto1.Anchura, Objeto1.Altura, Objeto1.Pixeles);
+                pictureBox1.Image = proc.getMapa();
+
                 this.labelDist.Text = algoritmoTinamoto(Objeto1, Objeto2).ToString();
             }
        }
