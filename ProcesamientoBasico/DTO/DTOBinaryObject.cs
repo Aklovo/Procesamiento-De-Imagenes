@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace ProcesamientoBasico
 {
-    public class ObjetoBinario
+    public class DTOBinaryObject
     {
         public int[] Pixeles { get; set; }
         public int Anchura { get; set; }
         public int Altura { get; set; }
-        public Cordenada Cordenadas { get; set; }
-        public Cordenada CordenadasInferior { get; set; }
+        public DTOCoordinate Cordenadas { get; set; }
+        public DTOCoordinate CordenadasInferior { get; set; }
         public int Etiqueta { get; set; }
-        public Cordenada CentroDeMasa{ get; set; }
+        public DTOCoordinate CentroDeMasa{ get; set; }
         public int totalActivePixels;
 
-        public ObjetoBinario()
+        public DTOBinaryObject()
         { 
         
         }
 
-        public ObjetoBinario(Bitmap map, int etiqueta)
+        public DTOBinaryObject(Bitmap map, int etiqueta)
         {
             
             Anchura = map.Width;
@@ -39,10 +39,10 @@ namespace ProcesamientoBasico
                     
         }
 
-        public ObjetoBinario(int etiqueta, int x, int y)
+        public DTOBinaryObject(int etiqueta, int x, int y)
         {
-            Cordenadas = new Cordenada(x,y);
-            CordenadasInferior = new Cordenada(x,y);
+            Cordenadas = new DTOCoordinate(x,y);
+            CordenadasInferior = new DTOCoordinate(x,y);
 
             Etiqueta = etiqueta;
         }
@@ -80,7 +80,7 @@ namespace ProcesamientoBasico
                         y++;
                     }
 
-            CentroDeMasa = new Cordenada( (int)Math.Round( (float)sumaX / (float)x) ,  (int)Math.Round( (float)sumaY / (float)y) );
+            CentroDeMasa = new DTOCoordinate( (int)Math.Round( (float)sumaX / (float)x) ,  (int)Math.Round( (float)sumaY / (float)y) );
 
         }
 

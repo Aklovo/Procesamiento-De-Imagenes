@@ -1,6 +1,6 @@
 ﻿namespace ProcesamientoBasico
 {
-    partial class Placas
+    partial class UICarPlates
     {
         /// <summary>
         /// Required designer variable.
@@ -37,8 +37,10 @@
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureHistogram = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureHistogram)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -96,7 +98,7 @@
             0,
             0,
             0});
-            this.numericUpDown1.Location = new System.Drawing.Point(573, 235);
+            this.numericUpDown1.Location = new System.Drawing.Point(617, 219);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             150,
             0,
@@ -121,7 +123,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(497, 237);
+            this.label1.Location = new System.Drawing.Point(549, 221);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 17;
@@ -131,17 +133,26 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(622, 289);
+            this.label2.Location = new System.Drawing.Point(626, 384);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 22);
             this.label2.TabIndex = 18;
             this.label2.Text = "Placa";
             // 
-            // Placas
+            // pictureHistogram
+            // 
+            this.pictureHistogram.Location = new System.Drawing.Point(476, 260);
+            this.pictureHistogram.Name = "pictureHistogram";
+            this.pictureHistogram.Size = new System.Drawing.Size(255, 100);
+            this.pictureHistogram.TabIndex = 19;
+            this.pictureHistogram.TabStop = false;
+            // 
+            // UICarPlates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 433);
+            this.Controls.Add(this.pictureHistogram);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown1);
@@ -150,10 +161,11 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
-            this.Name = "Placas";
+            this.Name = "UICarPlates";
             this.Text = "Placas";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureHistogram)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,5 +182,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureHistogram;
     }
 }

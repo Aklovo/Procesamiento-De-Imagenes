@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProcesamientoBasico.Business;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,13 +12,13 @@ using System.Windows.Forms;
 
 namespace ProcesamientoBasico
 {
-    public partial class Placas : Form
+    public partial class UICarPlates : Form
     {
 
-        AlgoritmoSegmentacion ob;
+        LogicSegmentation ob;
         Bitmap map;
 
-        public Placas()
+        public UICarPlates()
         {
             InitializeComponent();
         }
@@ -42,36 +43,43 @@ namespace ProcesamientoBasico
         {
             map = new Bitmap(comboBox1.Text);
 
-            ob = new AlgoritmoSegmentacion(map);
+            ob = new LogicSegmentation(map);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
+            pictureHistogram.Image = ob.getHistrogram();
+
 
             ob.descomponerRGB();
             ob.binarizacion((int)numericUpDown1.Value);
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
             pictureBox1.Image = map;
+
+
+            
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            ob = new AlgoritmoSegmentacion(map);
+            ob = new LogicSegmentation(map);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
 
+
             ob.descomponerRGB();
             ob.binarizacion((int)numericUpDown1.Value);
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
             pictureBox1.Image = ob.getMapa();
-            Dictionary<int, ObjetoBinario> objetos = ob.generarObjetosBinarios();
-            Tanimoto tanimoto = new Tanimoto(objetos);
+
+            Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
+            LogicTanimoto tanimoto = new LogicTanimoto(objetos);
             label2.Text = tanimoto.obtenerPlacas();
         }
 

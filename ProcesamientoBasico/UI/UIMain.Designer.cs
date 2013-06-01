@@ -1,6 +1,6 @@
 ﻿namespace ProcesamientoBasico
 {
-    partial class Form1
+    partial class UIMain
     {
         /// <summary>
         /// Required designer variable.

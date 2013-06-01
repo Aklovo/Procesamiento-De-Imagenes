@@ -7,9 +7,9 @@ using System.Drawing;
 
 namespace ProcesamientoBasico
 {
-    class OperacionesBasicas : ProcesadorBasico
+    class LogicBasicOperations : LogicBasicProcessor
     {
-        public OperacionesBasicas(Bitmap mapa) : base(mapa) { }
+        public LogicBasicOperations(Bitmap mapa) : base(mapa) { }
 
         public void escalaDeGrises()
         {
@@ -159,6 +159,73 @@ namespace ProcesamientoBasico
                 }
             }
         }
+
+        public Bitmap getHistrogram()
+        {
+            Bitmap mapa = new Bitmap(256, 100, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            map = getMapOfPixels();
+
+            int MaxValue = map.Values.Max();
+            Console.WriteLine(MaxValue);
+
+            for (int j = 0; j < 256 ; j++) 
+            {
+                int CurrentValue = map[j];
+
+                if (CurrentValue == MaxValue)
+                {
+                    Console.WriteLine(j);
+
+                }
+
+                CurrentValue *= 100;
+                CurrentValue /= MaxValue;
+
+                for (int i = 0; i < 100; i++)
+                {
+                    int RGB;
+
+                    if (CurrentValue >= i)
+                    {
+                        RGB = (0xff << 24) | (0 << 16) | (0 << 8) | 0;   
+                    }
+                    else
+                    {
+                        RGB = (0xff << 24) | (255 << 16) | (255 << 8) | 255; 
+                    }
+
+                    mapa.SetPixel(j,99-i, Color.FromArgb(RGB));
+                }
+            }
+            return mapa;
+        }
+
+        public Dictionary<int, int> getMapOfPixels()
+        {
+            Dictionary<int, int> MapPixels = new Dictionary<int, int>();
+            int it = 0;
+
+            for (int i = 0; i < 256; i++)
+            {
+                MapPixels[i] = 0;
+            }
+
+            for (int j = 0; j < Height - 1; j++)
+            {
+                for (int i = 0; i < Width; i++)
+                {
+                    it = j * Width + i;
+                    int key = R[it];
+                    MapPixels[key]++;
+                }
+            }
+
+            return MapPixels;
+        }
+
+
     }
 
 }

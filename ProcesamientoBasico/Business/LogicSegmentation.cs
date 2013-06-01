@@ -7,14 +7,14 @@ using System.Drawing;
 
 namespace ProcesamientoBasico
 {
-    class AlgoritmoSegmentacion : OperacionesBasicas
+    class LogicSegmentation : LogicBasicOperations
     {
         
-        public AlgoritmoSegmentacion(Bitmap mapa) : base(mapa){}
+        public LogicSegmentation(Bitmap mapa) : base(mapa){}
 
         int[] VectorColores;
         Dictionary<int, int> colores = new Dictionary<int, int>();
-        Dictionary<int, ObjetoBinario> ObjetosBinarios = new Dictionary<int, ObjetoBinario>();
+        Dictionary<int, DTOBinaryObject> ObjetosBinarios = new Dictionary<int, DTOBinaryObject>();
  
         public void segmentacion()
         {
@@ -40,7 +40,7 @@ namespace ProcesamientoBasico
             colorearMapas();
         }
 
-        public Dictionary<int, ObjetoBinario> generarObjetosBinarios()
+        public Dictionary<int, DTOBinaryObject> generarObjetosBinarios()
         {
             segmentacion();
 
@@ -49,13 +49,13 @@ namespace ProcesamientoBasico
                 for (int i = 0; i < Width; i++)
                 {
                     int it = j * Width + i;
-                    ObjetoBinario objeto;
+                    DTOBinaryObject objeto;
 
                     if (VectorColores[it] != -1) {
                         if(ObjetosBinarios.TryGetValue(VectorColores[it], out objeto)){
                             objeto.VerificarPunto(i,j);
                         } else {
-                            objeto = new ObjetoBinario(VectorColores[it], i, j);
+                            objeto = new DTOBinaryObject(VectorColores[it], i, j);
                             ObjetosBinarios[VectorColores[it]] = objeto;
                         }
                     }

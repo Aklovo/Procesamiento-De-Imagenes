@@ -1,6 +1,6 @@
 ﻿namespace ProcesamientoBasico
 {
-    partial class Tanimoto
+    partial class UITanimoto
     {
         /// <summary>
         /// Required designer variable.

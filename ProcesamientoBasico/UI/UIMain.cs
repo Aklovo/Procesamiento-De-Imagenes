@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProcesamientoBasico
 {
-    public partial class Form1 : Form
+    public partial class UIMain : Form
     {
-        public Form1()
+        public UIMain()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace ProcesamientoBasico
 
         private void escalaDeGrisesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.escalaDeGrises();
             ob.componerRGB();
@@ -35,7 +35,7 @@ namespace ProcesamientoBasico
 
         private void binarizacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.binarizacion(125);
             ob.componerRGB();
@@ -44,7 +44,7 @@ namespace ProcesamientoBasico
 
         private void negativoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.negativo();
             ob.componerRGB();
@@ -53,7 +53,7 @@ namespace ProcesamientoBasico
 
         private void componenteRojoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.componenteRojo();
             PBImagen.Image = ob.getMapa();
@@ -61,7 +61,7 @@ namespace ProcesamientoBasico
 
         private void componenteVerdeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.componenteVerde();
             PBImagen.Image = ob.getMapa();
@@ -69,7 +69,7 @@ namespace ProcesamientoBasico
 
         private void componenteAzulToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.componenteAzul();
             PBImagen.Image = ob.getMapa();
@@ -77,7 +77,7 @@ namespace ProcesamientoBasico
 
         private void clasificacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.binarizacion(125);
             ob.componerRGB();
@@ -90,7 +90,7 @@ namespace ProcesamientoBasico
         private void objetosBinariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
@@ -116,7 +116,7 @@ namespace ProcesamientoBasico
 
         private void bordeHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
@@ -127,7 +127,7 @@ namespace ProcesamientoBasico
 
         private void bordeVerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
@@ -138,7 +138,7 @@ namespace ProcesamientoBasico
 
         private void filtroRobertsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OperacionesBasicas ob = new OperacionesBasicas((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
@@ -149,7 +149,7 @@ namespace ProcesamientoBasico
 
         private void segmentacionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
             ob.descomponerRGB();
             ob.binarizacion(125);
             ob.componerRGB();
@@ -162,7 +162,7 @@ namespace ProcesamientoBasico
         private void distanciaTinamotoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
@@ -173,17 +173,17 @@ namespace ProcesamientoBasico
             ob.binarizacion(90);
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
-            Dictionary<int, ObjetoBinario> objetos = ob.generarObjetosBinarios();
+            Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
             PBImagen.Image = ob.getMapa();
 
-            Tanimoto tanimoto = new Tanimoto(objetos);
+            UITanimoto tanimoto = new UITanimoto(objetos);
             tanimoto.Show();
         }
 
         private void objetosBinariosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-            AlgoritmoSegmentacion ob = new AlgoritmoSegmentacion((Bitmap)this.PBImagen.Image);
+            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
 
             ob.descomponerRGB();
             ob.escalaDeGrises();
@@ -202,7 +202,7 @@ namespace ProcesamientoBasico
 
         private void placasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Placas placas = new Placas();
+            UICarPlates placas = new UICarPlates();
             placas.Show();
         }
     }

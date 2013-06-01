@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ProcesamientoBasico
 {
-    public class Cordenada
+    public class DTOCoordinate
     {
         public int PosX { get; set; }
         public int PosY { get; set; }
 
-        public Cordenada(int x, int y)
+        public DTOCoordinate(int x, int y)
         {
             PosX = x;
             PosY = y;

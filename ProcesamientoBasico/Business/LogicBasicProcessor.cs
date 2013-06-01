@@ -17,7 +17,7 @@ namespace ProcesamientoBasico
      * 
      */
 
-    class ProcesadorBasico
+    class LogicBasicProcessor
     {
         public int[] R;
         public int[] G;
@@ -27,14 +27,14 @@ namespace ProcesamientoBasico
         public int Width;
         public int Height;
 
-        public ProcesadorBasico(Bitmap mapa)
+        public LogicBasicProcessor(Bitmap mapa)
         {
             this.mapa = mapa;
             Width = mapa.Size.Width;
             Height = mapa.Size.Height;
         }
 
-        public ProcesadorBasico(int Width,int Height, int[] array)
+        public LogicBasicProcessor(int Width,int Height, int[] array)
         {
             this.Width = Width;
             this.Height = Height;
