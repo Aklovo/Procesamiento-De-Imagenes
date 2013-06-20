@@ -231,7 +231,6 @@ namespace ProcesamientoBasico
 
             return min;
         }
-
     }
     
 }

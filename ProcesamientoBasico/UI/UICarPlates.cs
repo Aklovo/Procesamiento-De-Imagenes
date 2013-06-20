@@ -41,6 +41,8 @@ namespace ProcesamientoBasico
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Dictionary<int, int> mapPixels = new Dictionary<int,int>();
+            int bestUmbral;
             map = new Bitmap(comboBox1.Text);
 
             ob = new LogicSegmentation(map);
@@ -49,17 +51,21 @@ namespace ProcesamientoBasico
             ob.escalaDeGrises();
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
-            pictureHistogram.Image = ob.getHistrogram();
+            mapPixels = ob.getMapOfPixels();
 
+            bestUmbral = ob.getBestUmbral(mapPixels);
+
+            pictureHistogram.Image = ob.getHistrogram(mapPixels, bestUmbral);
 
             ob.descomponerRGB();
-            ob.binarizacion((int)numericUpDown1.Value);
+            ob.binarizacion(bestUmbral);
             ob.componerRGB();
             ob.setMapa(ob.getMapa());
             pictureBox1.Image = map;
 
-
-            
+            Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
+            LogicTanimoto tanimoto = new LogicTanimoto(objetos);
+            label2.Text = tanimoto.obtenerPlacas();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)

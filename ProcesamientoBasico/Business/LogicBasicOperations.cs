@@ -160,25 +160,14 @@ namespace ProcesamientoBasico
             }
         }
 
-        public Bitmap getHistrogram()
+        public Bitmap getHistrogram(Dictionary<int, int> mapPixels, int umbral)
         {
             Bitmap mapa = new Bitmap(256, 100, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-            Dictionary<int, int> map = new Dictionary<int, int>();
-            map = getMapOfPixels();
-
-            int MaxValue = map.Values.Max();
-            Console.WriteLine(MaxValue);
-
+            int MaxValue = mapPixels.Values.Max();
+        
             for (int j = 0; j < 256 ; j++) 
             {
-                int CurrentValue = map[j];
-
-                if (CurrentValue == MaxValue)
-                {
-                    Console.WriteLine(j);
-
-                }
+                int CurrentValue = mapPixels[j];
 
                 CurrentValue *= 100;
                 CurrentValue /= MaxValue;
@@ -187,7 +176,11 @@ namespace ProcesamientoBasico
                 {
                     int RGB;
 
-                    if (CurrentValue >= i)
+                    if (j == umbral)
+                    {
+                        RGB = (0xff << 24) | (255 << 16) | (0 << 8) | 0; 
+                    }
+                    else if (CurrentValue >= i)
                     {
                         RGB = (0xff << 24) | (0 << 16) | (0 << 8) | 0;   
                     }
@@ -226,6 +219,127 @@ namespace ProcesamientoBasico
         }
 
 
+        public int getBestUmbral(Dictionary<int, int> mapPixels)
+        {
+            double minValue, valueLeft, valueRight, varLeft, varRight, weightLeft, weightRight, minTotal;
+            int totalWeight;
+            minValue = 0;
+            minTotal = 100000000000000000;
+
+            totalWeight = getTotalWeight(mapPixels);
+
+            for (int i = 1; i < mapPixels.Count; i++)
+            {
+                valueLeft = getAverageLeft(mapPixels, i);
+                valueRight = getAverageRight(mapPixels, i);
+
+                varLeft = getVarLeft(mapPixels, i, valueLeft);
+                varRight = getVarRight(mapPixels, i, valueRight);
+
+                weightLeft = getWeightLeft(mapPixels, i);
+                weightRight = getWeightRight(mapPixels, i);
+
+                minValue = (varLeft * (weightLeft/totalWeight)) + (varRight * (weightRight/totalWeight));
+
+                if (minValue > 0)
+                    minTotal = Math.Min(minValue, minTotal);
+
+            }
+
+            return (int)minTotal;
+        }
+
+        private int getTotalWeight(Dictionary<int, int> mapPixels)
+        {
+            int total = 0;
+
+            for (int i = 0; i < mapPixels.Count ; i++)
+            {
+                total += mapPixels[i];
+            }
+
+            return total;
+        }
+
+        private double getAverageLeft(Dictionary<int, int> mapPixels, int bound)
+        {
+            double up = 0, down = 0;
+
+            for (int i = 0; i < bound; i++)
+            {
+                up += (mapPixels[i] * i);
+                down += mapPixels[i];
+            }
+
+            return up / down;
+        }
+
+        private double getAverageRight(Dictionary<int, int> mapPixels, int bound)
+        {
+            double up = 0, down = 0;
+
+            for (int i = bound; i < mapPixels.Count; i++)
+            {
+                up += (mapPixels[i] * i);
+                down += mapPixels[i];
+            }
+
+            return up / down;
+        }
+
+        private double getWeightRight(Dictionary<int, int> mapPixels, int bound)
+        {
+            double sum = 0;
+
+            for (int i = bound; i < mapPixels.Count; i++)
+            {
+                sum += mapPixels[i];
+            }
+
+            return sum;
+        }
+
+        private double getWeightLeft(Dictionary<int, int> mapPixels, int bound)
+        {
+            double sum = 0;
+
+            for (int i = 0; i < bound; i++)
+            {
+                sum += mapPixels[i];
+            }
+
+            return sum;
+        }
+
+        private double getVarRight(Dictionary<int, int> mapPixels, int bound, double valueRight)
+        {
+            double up = 0, down = 0;
+
+            for (int i = bound ; i < mapPixels.Count; i++)
+            {
+                up += ((mapPixels[i] - valueRight) * i);
+                down += mapPixels[i];
+            }
+
+            return up / down;
+        }
+
+        private double getVarLeft(Dictionary<int, int> mapPixels, int bound, double valueLeft)
+        {
+            double up = 0, down = 0;
+
+            for (int i = 0; i < bound; i++)
+            {
+                up += ((mapPixels[i] - valueLeft) * i);
+                down += mapPixels[i];
+            }
+
+            return up / down;
+        }
+
+        
+
+        
     }
 
 }
