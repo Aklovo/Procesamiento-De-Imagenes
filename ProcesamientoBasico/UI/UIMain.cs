@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace ProcesamientoBasico
 {
@@ -204,6 +205,28 @@ namespace ProcesamientoBasico
         {
             UICarPlates placas = new UICarPlates();
             placas.Show();
+        }
+
+
+        private void btnBright_Click(object sender, EventArgs e)
+        {
+            decimal numericValue = numericUpDown1.Value;
+            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            ob.descomponerRGB();
+            ob.getAbrillantamiento((double)numericValue);
+            ob.componerRGB();
+            ob.setMapa(ob.getMapa());
+
+            PBImagen.Image = ob.getMapa();
+            
+           }
+
+        private void UIMain_Load(object sender, EventArgs e)
+        {
+            this.numericUpDown1.DecimalPlaces = 1;
+            this.numericUpDown1.Increment = 0.1M;
+            this.numericUpDown1.Maximum = 2;
+            this.numericUpDown1.Minimum = 0;
         }
     }
 }

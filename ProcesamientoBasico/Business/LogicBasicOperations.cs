@@ -218,6 +218,39 @@ namespace ProcesamientoBasico
             return MapPixels;
         }
 
+        public void getAbrillantamiento(double cambioDeBrillo)
+        {
+            double[] Rbrillar;
+            double[] Gbrillar;
+            double[] Bbrillar;
+            Rbrillar = new double[mapa.Size.Width * mapa.Size.Height];
+            Gbrillar = new double[mapa.Size.Width * mapa.Size.Height];
+            Bbrillar = new double[mapa.Size.Width * mapa.Size.Height];
+
+            double original = 255;
+
+            for (int j = 0; j < mapa.Size.Height; j++)
+                for (int i = 0; i < mapa.Size.Width; i++)
+                {
+
+                    Rbrillar[j * mapa.Size.Width + i] = R[j * mapa.Size.Width + i] / original;
+                    Gbrillar[j * mapa.Size.Width + i] = G[j * mapa.Size.Width + i] / original;
+                    Bbrillar[j * mapa.Size.Width + i] = B[j * mapa.Size.Width + i] / original;
+
+                    Rbrillar[j * mapa.Size.Width + i] = Math.Pow(Rbrillar[j * mapa.Size.Width + i], cambioDeBrillo);
+                    Gbrillar[j * mapa.Size.Width + i] = Math.Pow(Gbrillar[j * mapa.Size.Width + i], cambioDeBrillo);
+                    Bbrillar[j * mapa.Size.Width + i] = Math.Pow(Bbrillar[j * mapa.Size.Width + i], cambioDeBrillo);
+
+                    Rbrillar[j * mapa.Size.Width + i] *= original;
+                    Gbrillar[j * mapa.Size.Width + i] *= original;
+                    Bbrillar[j * mapa.Size.Width + i] *= original;
+
+                    R[j * mapa.Size.Width + i] = (int)Math.Round(Rbrillar[j * mapa.Size.Width + i]);
+                    G[j * mapa.Size.Width + i] = (int)Math.Round(Gbrillar[j * mapa.Size.Width + i]);
+                    B[j * mapa.Size.Width + i] = (int)Math.Round(Bbrillar[j * mapa.Size.Width + i]);
+
+                }
+        }
 
         public int getBestUmbral(Dictionary<int, int> mapPixels)
         {

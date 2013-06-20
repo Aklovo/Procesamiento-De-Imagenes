@@ -46,12 +46,16 @@
             this.segmentacionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.objetosBinariosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.distanciaTinamotoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.placasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OFIMagen = new System.Windows.Forms.OpenFileDialog();
             this.SFImagen = new System.Windows.Forms.SaveFileDialog();
             this.PBImagen = new System.Windows.Forms.PictureBox();
-            this.placasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBright = new System.Windows.Forms.Button();
             this.MSPrincipal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // MSPrincipal
@@ -63,7 +67,7 @@
             this.placasToolStripMenuItem});
             this.MSPrincipal.Location = new System.Drawing.Point(0, 0);
             this.MSPrincipal.Name = "MSPrincipal";
-            this.MSPrincipal.Size = new System.Drawing.Size(652, 24);
+            this.MSPrincipal.Size = new System.Drawing.Size(788, 24);
             this.MSPrincipal.TabIndex = 0;
             this.MSPrincipal.Text = "menuStrip1";
             // 
@@ -200,6 +204,13 @@
             this.distanciaTinamotoToolStripMenuItem.Text = "Distancia Tinamoto";
             this.distanciaTinamotoToolStripMenuItem.Click += new System.EventHandler(this.distanciaTinamotoToolStripMenuItem_Click);
             // 
+            // placasToolStripMenuItem
+            // 
+            this.placasToolStripMenuItem.Name = "placasToolStripMenuItem";
+            this.placasToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.placasToolStripMenuItem.Text = "Obtener Placas";
+            this.placasToolStripMenuItem.Click += new System.EventHandler(this.placasToolStripMenuItem_Click);
+            // 
             // OFIMagen
             // 
             this.OFIMagen.FileName = "openFileDialog1";
@@ -215,31 +226,56 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PBImagen.Location = new System.Drawing.Point(12, 27);
             this.PBImagen.Name = "PBImagen";
-            this.PBImagen.Size = new System.Drawing.Size(628, 443);
+            this.PBImagen.Size = new System.Drawing.Size(642, 443);
             this.PBImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PBImagen.TabIndex = 1;
             this.PBImagen.TabStop = false;
             // 
-            // placasToolStripMenuItem
+            // numericUpDown1
             // 
-            this.placasToolStripMenuItem.Name = "placasToolStripMenuItem";
-            this.placasToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.placasToolStripMenuItem.Text = "Obtener Placas";
-            this.placasToolStripMenuItem.Click += new System.EventHandler(this.placasToolStripMenuItem_Click);
+            this.numericUpDown1.Location = new System.Drawing.Point(660, 227);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 2;
             // 
-            // Form1
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(657, 199);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Brillo";
+            // 
+            // btnBright
+            // 
+            this.btnBright.Location = new System.Drawing.Point(705, 264);
+            this.btnBright.Name = "btnBright";
+            this.btnBright.Size = new System.Drawing.Size(75, 23);
+            this.btnBright.TabIndex = 4;
+            this.btnBright.Text = "Aceptar";
+            this.btnBright.UseVisualStyleBackColor = true;
+            this.btnBright.Click += new System.EventHandler(this.btnBright_Click);
+            // 
+            // UIMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 482);
+            this.ClientSize = new System.Drawing.Size(788, 482);
+            this.Controls.Add(this.btnBright);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.PBImagen);
             this.Controls.Add(this.MSPrincipal);
             this.MainMenuStrip = this.MSPrincipal;
-            this.Name = "Form1";
+            this.Name = "UIMain";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.UIMain_Load);
             this.MSPrincipal.ResumeLayout(false);
             this.MSPrincipal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PBImagen)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,6 +305,9 @@
         private System.Windows.Forms.ToolStripMenuItem objetosBinariosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem distanciaTinamotoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem placasToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnBright;
     }
 }
 

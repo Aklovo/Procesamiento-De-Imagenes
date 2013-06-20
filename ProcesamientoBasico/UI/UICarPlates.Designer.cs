@@ -38,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureHistogram = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelUmbral = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureHistogram)).BeginInit();
@@ -51,7 +53,7 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
             this.pictureBox1.Location = new System.Drawing.Point(26, 73);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(417, 306);
+            this.pictureBox1.Size = new System.Drawing.Size(417, 329);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
@@ -98,7 +100,7 @@
             0,
             0,
             0});
-            this.numericUpDown1.Location = new System.Drawing.Point(617, 219);
+            this.numericUpDown1.Location = new System.Drawing.Point(532, 219);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             150,
             0,
@@ -123,7 +125,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(549, 221);
+            this.label1.Location = new System.Drawing.Point(473, 221);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 17;
@@ -133,7 +135,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(626, 384);
+            this.label2.Location = new System.Drawing.Point(472, 425);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 22);
             this.label2.TabIndex = 18;
@@ -141,17 +143,37 @@
             // 
             // pictureHistogram
             // 
-            this.pictureHistogram.Location = new System.Drawing.Point(476, 260);
+            this.pictureHistogram.Location = new System.Drawing.Point(476, 302);
             this.pictureHistogram.Name = "pictureHistogram";
             this.pictureHistogram.Size = new System.Drawing.Size(255, 100);
             this.pictureHistogram.TabIndex = 19;
             this.pictureHistogram.TabStop = false;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(641, 221);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(96, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Umbral Automatico";
+            // 
+            // labelUmbral
+            // 
+            this.labelUmbral.AutoSize = true;
+            this.labelUmbral.Location = new System.Drawing.Point(743, 221);
+            this.labelUmbral.Name = "labelUmbral";
+            this.labelUmbral.Size = new System.Drawing.Size(22, 13);
+            this.labelUmbral.TabIndex = 21;
+            this.labelUmbral.Text = "xxx";
+            // 
             // UICarPlates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(836, 433);
+            this.ClientSize = new System.Drawing.Size(836, 456);
+            this.Controls.Add(this.labelUmbral);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureHistogram);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -183,5 +205,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureHistogram;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelUmbral;
     }
 }

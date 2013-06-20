@@ -63,6 +63,7 @@ namespace ProcesamientoBasico
             ob.setMapa(ob.getMapa());
             pictureBox1.Image = map;
 
+            labelUmbral.Text = bestUmbral.ToString();
             Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
             LogicTanimoto tanimoto = new LogicTanimoto(objetos);
             label2.Text = tanimoto.obtenerPlacas();
