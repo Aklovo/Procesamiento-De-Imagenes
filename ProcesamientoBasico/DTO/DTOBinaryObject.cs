@@ -9,84 +9,79 @@ namespace ProcesamientoBasico
 {
     public class DTOBinaryObject
     {
-        public int[] Pixeles { get; set; }
-        public int Anchura { get; set; }
-        public int Altura { get; set; }
-        public DTOCoordinate Cordenadas { get; set; }
-        public DTOCoordinate CordenadasInferior { get; set; }
-        public int Etiqueta { get; set; }
-        public DTOCoordinate CentroDeMasa{ get; set; }
-        public int totalActivePixels;
+        public int[] Pixels { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public DTOCoordinate Points { get; set; }
+        public DTOCoordinate BottomPoint { get; set; }
+        public int Label { get; set; }
+        public DTOCoordinate CenterOfMass{ get; set; }
+        public int totalActivePixels{ get; set; }
 
-        public DTOBinaryObject()
-        { 
-        
-        }
+        public DTOBinaryObject() { }
 
         public DTOBinaryObject(Bitmap map, int etiqueta)
         {
-            
-            Anchura = map.Width;
-            Altura = map.Height;
-            Etiqueta = etiqueta;
-            Pixeles = new int[Anchura * Altura];
+            Width = map.Width;
+            Height = map.Height;
+            Label = etiqueta;
+            Pixels = new int[Width * Height];
 
-            for (int j = 0; j < Altura; j++)
-                for (int i = 0; i < Anchura; i++){
-                    int it = j * Anchura + i;
-                    Pixeles[it] = map.GetPixel(i, j).B == 0 ? 255 : -1;
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++){
+                    int it = iteratorHeight * Width + iteratorWidth;
+                    Pixels[it] = map.GetPixel(iteratorWidth, iteratorHeight).B == 0 ? 255 : -1;
                 }
                     
         }
 
-        public DTOBinaryObject(int etiqueta, int x, int y)
+        public DTOBinaryObject(int label, int x, int y)
         {
-            Cordenadas = new DTOCoordinate(x,y);
-            CordenadasInferior = new DTOCoordinate(x,y);
+            Points = new DTOCoordinate(x,y);
+            BottomPoint = new DTOCoordinate(x,y);
 
-            Etiqueta = etiqueta;
+            Label = label;
         }
 
-        public void VerificarPunto(int x, int y)
+        public void checkPoint(int x, int y)
         {
-            Cordenadas.PosX = Math.Min(Cordenadas.PosX, x);
-            Cordenadas.PosY = Math.Min(Cordenadas.PosY, y);
-            CordenadasInferior.PosX = Math.Max(CordenadasInferior.PosX, x);
-            CordenadasInferior.PosY = Math.Max(CordenadasInferior.PosY, y);
+            Points.PosX = Math.Min(Points.PosX, x);
+            Points.PosY = Math.Min(Points.PosY, y);
+            BottomPoint.PosX = Math.Max(BottomPoint.PosX, x);
+            BottomPoint.PosY = Math.Max(BottomPoint.PosY, y);
 
         }
 
-        public void CalcularAnchuraAltura()
+        public void computeSize()
         {
-            Anchura = CordenadasInferior.PosX - Cordenadas.PosX + 1;
-            Altura = CordenadasInferior.PosY - Cordenadas.PosY + 1;
+            Width = BottomPoint.PosX - Points.PosX + 1;
+            Height = BottomPoint.PosY - Points.PosY + 1;
         }
 
-        public void CalcularCentroDeMasa() 
+        public void setCenterOfMass() 
         {
             
-            int sumaX = 0, x = 0;
-            int sumaY = 0, y = 0;
+            int sumX = 0, x = 0;
+            int sumY = 0, y = 0;
             totalActivePixels = 0;
 
-            for (int j = 0; j < Altura; j++)
-                for (int i = 0; i < Anchura; i++)
-                    if (Pixeles[j * Anchura + i] != -1)
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
+                {
+                    if (Pixels[iteratorHeight * Width + iteratorWidth] != -1)
                     {
                         totalActivePixels++;
-                        sumaY += j;
-                        sumaX += i;
+                        sumY += iteratorHeight;
+                        sumX += iteratorWidth;
                         x++;
                         y++;
                     }
+                }
+            }
 
-            CentroDeMasa = new DTOCoordinate( (int)Math.Round( (float)sumaX / (float)x) ,  (int)Math.Round( (float)sumaY / (float)y) );
+            CenterOfMass = new DTOCoordinate( (int)Math.Round( (float)sumX / (float)x) ,  (int)Math.Round( (float)sumY / (float)y) );
 
-        }
-
-        public int getTotalActivePixels()
-        {
-            return totalActivePixels;
         }
     }
 }

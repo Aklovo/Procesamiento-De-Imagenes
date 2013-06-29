@@ -7,107 +7,110 @@ using System.Drawing;
 
 namespace ProcesamientoBasico
 {
-    /*
-     * Autor: Mario Rodríguez.
-     * 
-     * Version: 29 de enero de 2013.
-     * 
-     * Descripción: Separa los componentes rojo, verde y azul
-     * de una imagen dada.
-     * 
-     */
-
     class LogicBasicProcessor
     {
         public int[] R;
         public int[] G;
         public int[] B;
         public int[] RGB;
-        public Bitmap mapa;
+
+        public Bitmap ImageMap;
         public int Width;
         public int Height;
 
-        public LogicBasicProcessor(Bitmap mapa)
+        protected const int redMask = 0xFF0000;
+        protected const int greenMask = 0xFF00;
+        protected const int blueMask = 0xFF;
+
+        public LogicBasicProcessor(Bitmap ImageMap)
         {
-            this.mapa = mapa;
-            Width = mapa.Size.Width;
-            Height = mapa.Size.Height;
+            this.ImageMap = ImageMap;
+            Width = ImageMap.Size.Width;
+            Height = ImageMap.Size.Height;
         }
 
         public LogicBasicProcessor(int Width,int Height, int[] array)
         {
+            int it, color;
             this.Width = Width;
             this.Height = Height;
 
             RGB = new int[Width * Height];
 
-            int mascaraR = 0xFF0000;
-            int mascaraG = 0xFF00;
-            int mascaraB = 0xFF;
-
-            for (int j = 0; j < Height; j++)
-                for (int i = 0; i < Width; i++)
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
                 {
 
-                    int it = j * Width + i;
-                    int color = array[it] != -1? 0 : -1;
-                    int R = (color & mascaraR) >> 16;
-                    int G = (color & mascaraG) >> 8;
-                    int B = (color & mascaraB);
+                    it = iteratorHeight * Width + iteratorWidth;
+                    color = array[it] != -1 ? 0 : -1;
+                   
+                    int R = (color & redMask) >> 16;
+                    int G = (color & greenMask) >> 8;
+                    int B = (color & blueMask);
 
                     RGB[it] = (0xff << 24) | (R << 16) | (G << 8) | B;
-                }    
+                }
+            }
         }
 
-        public void setMapa(Bitmap mapa)
+        public void setMapImage(Bitmap ImageMap)
         {
-            this.mapa = mapa;
-            Width = mapa.Size.Width;
-            Height = mapa.Size.Height;
+            this.ImageMap = ImageMap;
+            Width = ImageMap.Size.Width;
+            Height = ImageMap.Size.Height;
         }
 
-        public void descomponerRGB()
+        public void decomposeRGB()
         {
-            int mascaraR = 0xFF0000;
-            int mascaraG = 0xFF00;
-            int mascaraB = 0xFF; 
-
             R = new int[Width * Height];
             G = new int[Width * Height];
             B = new int[Width * Height];
 
-            int color;
-            for (int j = 0; j < Height; j++)
-                for (int i = 0; i < Width; i++)
-                {
-                    color = mapa.GetPixel(i, j).ToArgb();
+            int color, it;
 
-                    int it = j * Width + i;
-                    R[it] = (color & mascaraR) >> 16;
-                    G[it] = (color & mascaraG) >> 8;
-                    B[it] = (color & mascaraB);
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
+                {
+                    color = ImageMap.GetPixel(iteratorWidth, iteratorHeight).ToArgb();
+
+                    it = iteratorHeight * Width + iteratorWidth;
+                    R[it] = (color & redMask) >> 16;
+                    G[it] = (color & greenMask) >> 8;
+                    B[it] = (color & blueMask);
                 }
+            }
         }
 
-        public void componerRGB()
+        public void composeRGB()
         {
             RGB = new int[Width * Height];
-            for (int j = 0; j < Height; j++)
-                for (int i = 0; i < Width; i++)
+            int it;
+
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
                 {
-                    int it = j * Width + i;
+                    it = iteratorHeight * Width + iteratorWidth;
                     RGB[it] = (0xff << 24) | (R[it] << 16) | (G[it] << 8) | B[it];
-                }    
+                }
+            }
         }
 
-        public Bitmap getMapa()
+        public Bitmap getImageMap()
         {
-            Bitmap mapa = new Bitmap(Width, Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            for (int j = 0; j < Height ; j++)
-                for (int i = 0; i < Width ; i++)
-                    mapa.SetPixel(i, j, Color.FromArgb(RGB[j * Width + i]));
+            Bitmap imageMap = new Bitmap(Width, Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-            return mapa;
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
+                {
+                    imageMap.SetPixel(iteratorWidth, iteratorHeight, Color.FromArgb(RGB[iteratorHeight * Width + iteratorWidth]));
+                }
+            }
+
+            return imageMap;
         }
 
 

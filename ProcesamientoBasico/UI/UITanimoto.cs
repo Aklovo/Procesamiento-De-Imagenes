@@ -16,14 +16,14 @@ namespace ProcesamientoBasico
         
         LogicTanimoto tanimoto;
 
-        DTOBinaryObject Objeto1 = new DTOBinaryObject();
-        DTOBinaryObject Objeto2 = new DTOBinaryObject();
-        private bool flag1 = false;
-        private bool flag2 = false;
+        DTOBinaryObject BinaryObject1 = new DTOBinaryObject();
+        DTOBinaryObject BinaryObject2 = new DTOBinaryObject();
+        private bool Flag1 = false;
+        private bool Flag2 = false;
 
-        public UITanimoto(Dictionary<int, DTOBinaryObject> dic)
+        public UITanimoto(Dictionary<int, DTOBinaryObject> dictionary)
         {
-            tanimoto = new LogicTanimoto(dic);
+            tanimoto = new LogicTanimoto(dictionary);
             InitializeComponent();
             InitializeCombos();
         }
@@ -34,51 +34,51 @@ namespace ProcesamientoBasico
             String[] ComboBoxTwoValues;
 
             ComboBoxOneValues = tanimoto.getValuesComboBoxOne();
-            ComboBoxTwoValues = LogicTanimoto.NombrePatrones;
+            ComboBoxTwoValues = LogicTanimoto.Patterns;
 
-            foreach (int x in ComboBoxOneValues)
+            foreach (int value in ComboBoxOneValues)
             {
-                comboBox1.Items.Add(x);
+                comboBox1.Items.Add(value);
             }
 
-            foreach (String nombre in ComboBoxTwoValues)
+            foreach (String name in ComboBoxTwoValues)
             {
-                comboBox2.Items.Add(nombre);
+                comboBox2.Items.Add(name);
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            Objeto1 = tanimoto.getBinaryObjectByName(comboBox1.Text.ToString());
-            flag1 = true;
+            BinaryObject1 = tanimoto.getBinaryObjectByName(comboBox1.Text.ToString());
+            Flag1 = true;
 
-            if (flag2)
+            if (Flag2)
             {
-                Objeto1 = tanimoto.Escalar(Objeto1, Objeto2.Altura, Objeto2.Anchura);
-                tanimoto.algoritmoTinamoto(Objeto1, Objeto2);
+                BinaryObject1 = tanimoto.Scalar(BinaryObject1, BinaryObject2.Height, BinaryObject2.Width);
+                tanimoto.tanimotoDistance(BinaryObject1, BinaryObject2);
             }
 
-            LogicBasicProcessor procesador = new LogicBasicProcessor(Objeto1.Anchura, Objeto1.Altura, Objeto1.Pixeles); 
-            pictureBox1.Image = procesador.getMapa();
+            LogicBasicProcessor processor = new LogicBasicProcessor(BinaryObject1.Width, BinaryObject1.Height, BinaryObject1.Pixels); 
+            pictureBox1.Image = processor.getImageMap();
            
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Objeto2 = tanimoto.getPatternObjectByName(comboBox2.Text.ToString());
-            LogicBasicProcessor procesador = new LogicBasicProcessor(Objeto2.Anchura, Objeto2.Altura, Objeto2.Pixeles);
-            pictureBox2.Image = procesador.getMapa();
-            flag2 = true;
+            BinaryObject2 = tanimoto.getPatternObjectByName(comboBox2.Text.ToString());
+            LogicBasicProcessor processor = new LogicBasicProcessor(BinaryObject2.Width, BinaryObject2.Height, BinaryObject2.Pixels);
+            pictureBox2.Image = processor.getImageMap();
+            Flag2 = true;
 
-            if (flag1)
+            if (Flag1)
             {
-                Objeto1 = tanimoto.Escalar(Objeto1, Objeto2.Altura, Objeto2.Anchura);
+                BinaryObject1 = tanimoto.Scalar(BinaryObject1, BinaryObject2.Height, BinaryObject2.Width);
 
-                LogicBasicProcessor proc = new LogicBasicProcessor(Objeto1.Anchura, Objeto1.Altura, Objeto1.Pixeles);
-                pictureBox1.Image = proc.getMapa();
+                LogicBasicProcessor newProcessor = new LogicBasicProcessor(BinaryObject1.Width, BinaryObject1.Height, BinaryObject1.Pixels);
+                pictureBox1.Image = newProcessor.getImageMap();
 
-                this.labelDist.Text = tanimoto.algoritmoTinamoto(Objeto1, Objeto2).ToString();
+                this.labelDist.Text = tanimoto.tanimotoDistance(BinaryObject1, BinaryObject2).ToString();
             }
        }
 

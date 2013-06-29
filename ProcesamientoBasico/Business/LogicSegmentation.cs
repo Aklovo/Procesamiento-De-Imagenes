@@ -10,223 +10,236 @@ namespace ProcesamientoBasico
     class LogicSegmentation : LogicBasicOperations
     {
         
-        public LogicSegmentation(Bitmap mapa) : base(mapa){}
+        public LogicSegmentation(Bitmap imageMap) : base(imageMap){}
 
-        int[] VectorColores;
-        Dictionary<int, int> colores = new Dictionary<int, int>();
-        Dictionary<int, DTOBinaryObject> ObjetosBinarios = new Dictionary<int, DTOBinaryObject>();
+        int[] Colors;
+        Dictionary<int, int> DictionaryColors = new Dictionary<int, int>();
+        Dictionary<int, DTOBinaryObject> BinaryObjects = new Dictionary<int, DTOBinaryObject>();
  
-        public void segmentacion()
+        public void segmentation()
         {
             RGB = new int[Width * Height];
-            VectorColores = new int[Width * Height];
+            Colors = new int[Width * Height];
 
             int cont = 0;
 
-            for (int j = 0; j < Height; j++)
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
             {
-                for (int i = 0; i < Width; i++)
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
                 {
-                    int it = j * Width + i;
+                    int it = iteratorHeight * Width + iteratorWidth;
 
-                    if (mapa.GetPixel(i, j).ToArgb() != -1)
-                        VectorColores[it] = ++cont;
+                    if (ImageMap.GetPixel(iteratorWidth, iteratorHeight).ToArgb() != -1)
+                    {
+                        Colors[it] = ++cont;
+                    }
                     else
-                        VectorColores[it] = -1;
+                    {
+                        Colors[it] = -1;
+                    }
                 }
             }
 
-            generarMapas();
-            colorearMapas();
+            createMaps();
+            drawMaps();
         }
 
-        public Dictionary<int, DTOBinaryObject> generarObjetosBinarios()
+        public Dictionary<int, DTOBinaryObject> generateBinaryObjects()
         {
-            segmentacion();
+            segmentation();
 
-            for (int j = 0; j < Height; j++)
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
             {
-                for (int i = 0; i < Width; i++)
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
                 {
-                    int it = j * Width + i;
-                    DTOBinaryObject objeto;
+                    int it = iteratorHeight * Width + iteratorWidth;
+                    DTOBinaryObject binaryObject;
 
-                    if (VectorColores[it] != -1) {
-                        if(ObjetosBinarios.TryGetValue(VectorColores[it], out objeto)){
-                            objeto.VerificarPunto(i,j);
+                    if (Colors[it] != -1) {
+                        if(BinaryObjects.TryGetValue(Colors[it], out binaryObject)){
+                            binaryObject.checkPoint(iteratorWidth,iteratorHeight);
                         } else {
-                            objeto = new DTOBinaryObject(VectorColores[it], i, j);
-                            ObjetosBinarios[VectorColores[it]] = objeto;
+                            binaryObject = new DTOBinaryObject(Colors[it], iteratorWidth, iteratorHeight);
+                            BinaryObjects[Colors[it]] = binaryObject;
                         }
                     }
                 }
             }
 
-            foreach (var objetoBinario in ObjetosBinarios) {
+            foreach (var binaryObject in BinaryObjects) {
 
-                objetoBinario.Value.CalcularAnchuraAltura();
+                binaryObject.Value.computeSize();
                 int ptr = 0;
-                objetoBinario.Value.Pixeles = new int[objetoBinario.Value.Altura * objetoBinario.Value.Anchura];
+                binaryObject.Value.Pixels = new int[binaryObject.Value.Height * binaryObject.Value.Width];
 
-                for (int j = objetoBinario.Value.Cordenadas.PosY; j <= objetoBinario.Value.CordenadasInferior.PosY; j++)
+                for (int iteratorPositionY = binaryObject.Value.Points.PosY ; 
+                    iteratorPositionY <= binaryObject.Value.BottomPoint.PosY ; 
+                    iteratorPositionY++)
                 {
-                    for (int i = objetoBinario.Value.Cordenadas.PosX; i <= objetoBinario.Value.CordenadasInferior.PosX; i++)
+                    for (int i = binaryObject.Value.Points.PosX; i <= binaryObject.Value.BottomPoint.PosX; i++)
                     {
-                        int it = j * Width + i;
-                        objetoBinario.Value.Pixeles[ptr++]  = VectorColores[it];
+                        int it = iteratorPositionY * Width + i;
+                        binaryObject.Value.Pixels[ptr++]  = Colors[it];
                     }
                 }
 
-                objetoBinario.Value.CalcularCentroDeMasa();
+                binaryObject.Value.setCenterOfMass();
                 
             }
 
-            return ObjetosBinarios;
+            return BinaryObjects;
         }
 
-        public void imprimirObjetos()
+        public void printObjects()
         {
-            Dictionary<int, Bitmap> BitMaps = new Dictionary<int, Bitmap>();
-            int altura;
-            int anchura;
-            int[] pixeles;
+            Dictionary<int, Bitmap> bitMaps = new Dictionary<int, Bitmap>();
+            int height;
+            int width;
+            int[] pixels;
 
-            foreach (var objetos in ObjetosBinarios)
+            foreach (var binaryObject in BinaryObjects)
             { 
                 
-                altura = objetos.Value.Altura;
-                anchura = objetos.Value.Anchura;
-                pixeles = objetos.Value.Pixeles;
+                height = binaryObject.Value.Height;
+                width = binaryObject.Value.Width;
+                pixels = binaryObject.Value.Pixels;
 
-                Bitmap mapa = new Bitmap(anchura, altura, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                Bitmap imageMap = new Bitmap(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
-                for (int j = 0; j < altura; j++)
-                    for (int i = 0; i < anchura; i++)
+                for (int iteratorHeight = 0; iteratorHeight < height; iteratorHeight++)
+                {
+                    for (int iteratorWidth = 0; iteratorWidth < width; iteratorWidth++)
                     {
 
-                        int it = j * anchura + i;
+                        int it = iteratorHeight * width + iteratorWidth;
 
-                        int rgb = (0xff << 24) | (0 << 16) | (0 << 8) | 0; 
+                        int rgb = (0xff << 24) | (0 << 16) | (0 << 8) | 0;
 
-                        if (pixeles[it] == -1)
+                        if (pixels[it] == -1)
                             rgb = (0xff << 24) | (255 << 16) | (255 << 8) | 255;
 
-                        mapa.SetPixel(i, j, Color.FromArgb(rgb));
-                        mapa.Save(@"\\vmware-host\Shared Folders\Pictures\Objetos\" + objetos.Key + ".gif", System.Drawing.Imaging.ImageFormat.Gif);
+                        imageMap.SetPixel(iteratorWidth, iteratorHeight, Color.FromArgb(rgb));
+                        imageMap.Save(@"\\vmware-host\Shared Folders\Pictures\Objetos\" + binaryObject.Key + ".gif", System.Drawing.Imaging.ImageFormat.Gif);
                     }
+                }
 
             }
         }
 
-        public void generarMapas()
+        public void createMaps()
         {
             Boolean foundChange = true;
-            int numero = 0;
+            int number = 0;
+
             while (foundChange)
             {
                 foundChange = false;
-
-                for (int j = 0; j < Height; j++)
-                    for (int i = 0; i < Width; i++)
-                        if (VectorColores[j * Width + i] != -1)
+                for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+                {
+                    for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
+                    {
+                        if (Colors[iteratorHeight * Width + iteratorWidth] != -1)
                         {
-                            numero = verificarPixelesAlrededor(j * Width + i, VectorColores[j * Width + i]);
+                            number = checkPixelsAround(iteratorHeight * Width + iteratorWidth, Colors[iteratorHeight * Width + iteratorWidth]);
 
-                            if (numero != -1 && numero != VectorColores[j * Width + i])
+                            if (number != -1 && number != Colors[iteratorHeight * Width + iteratorWidth])
                             {
-                                VectorColores[j * Width + i] = numero;
+                                Colors[iteratorHeight * Width + iteratorWidth] = number;
                                 foundChange = true;
                             }
 
                         }
-
+                    }
+                }
             }
+
         }
 
-        public void colorearMapas() 
+        public void drawMaps() 
         {
+            int actual, value, it, color;
 
-            for (int j = 0; j < Height; j++)
-                for (int i = 0; i < Width; i++)
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
                 {
-                    int actual = j * Width + i;
-                    int value;
+                    actual = iteratorHeight * Width + iteratorWidth;
 
-                    if (VectorColores[actual] != -1 && !colores.TryGetValue(VectorColores[actual], out value)) 
-                        colores[VectorColores[actual]] = VectorColores[actual] * 100000;
+                    if (Colors[actual] != -1 && !DictionaryColors.TryGetValue(Colors[actual], out value))
+                        DictionaryColors[Colors[actual]] = Colors[actual] * 100000;
                 }
+            }
             
-            colores[-1] = 0xFFFFFF;
+            DictionaryColors[-1] = 0xFFFFFF;
 
             RGB = new int[Width * Height];
 
-            int mascaraR = 0xFF0000;
-            int mascaraG = 0xFF00;
-            int mascaraB = 0xFF;
-
-            for (int j = 0; j < Height; j++)
-                for (int i = 0; i < Width; i++)
+            for (int iteratorHeight = 0; iteratorHeight < Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < Width; iteratorWidth++)
                 {
-                    int it = j * Width + i;
-                    int color = colores[VectorColores[it]];
-                    int R =  (color & mascaraR) >> 16;
-                    int G = (color & mascaraG) >> 8;
-                    int B = (color & mascaraB);
+                    it = iteratorHeight * Width + iteratorWidth;
+                    color = DictionaryColors[Colors[it]];
+
+                    int R = (color & redMask) >> 16;
+                    int G = (color & greenMask) >> 8;
+                    int B = (color & blueMask);
 
                     RGB[it] = (0xff << 24) | (R << 16) | (G << 8) | B;
-                }    
+                }
+            }
 
         }
 
-        public int verificarPixelesAlrededor(int actual, int min) 
+        public int checkPixelsAround(int actual, int min) 
         {
             
-            int izqSuperior = actual-Width-1;
-            if(izqSuperior >= 0 && VectorColores[izqSuperior] != -1)
+            int leftTop = actual-Width-1;
+            if(leftTop >= 0 && Colors[leftTop] != -1)
             {
-                min = Math.Min(min, VectorColores[izqSuperior]);
+                min = Math.Min(min, Colors[leftTop]);
             }
 
-            int centSuperior = actual - Width;
-            if (centSuperior >= 0 && VectorColores[centSuperior] != -1)
+            int centerTop = actual - Width;
+            if (centerTop >= 0 && Colors[centerTop] != -1)
             {
-                min = Math.Min(min, VectorColores[centSuperior]);
+                min = Math.Min(min, Colors[centerTop]);
             }
 
-            int derSuperior = actual - Width + 1;
-            if (derSuperior >= 0 && VectorColores[derSuperior] != -1)
+            int rightTop = actual - Width + 1;
+            if (rightTop >= 0 && Colors[rightTop] != -1)
             {
-                min = Math.Min(min, VectorColores[derSuperior]);
+                min = Math.Min(min, Colors[rightTop]);
             }
 
-            int izqCentral = actual - 1;
-            if (izqCentral >= 0 && VectorColores[izqCentral] != -1)
+            int centerLeft = actual - 1;
+            if (centerLeft >= 0 && Colors[centerLeft] != -1)
             {
-                min = Math.Min(min, VectorColores[izqCentral]);
+                min = Math.Min(min, Colors[centerLeft]);
             }
 
-            int derCentral = actual + 1;
-            if (derCentral < Width * Height && VectorColores[derCentral] != -1)
+            int centerRight = actual + 1;
+            if (centerRight < Width * Height && Colors[centerRight] != -1)
             { 
-                min = Math.Min(min,VectorColores[derCentral]);
+                min = Math.Min(min,Colors[centerRight]);
             }
 
-            int izqInferior = actual + Width - 1;
-            if (izqInferior < Width * Height && VectorColores[izqInferior] != -1)
+            int leftBottom = actual + Width - 1;
+            if (leftBottom < Width * Height && Colors[leftBottom] != -1)
             {
-                min = Math.Min(min,VectorColores[izqInferior]);
+                min = Math.Min(min,Colors[leftBottom]);
             }
 
-            int centInferior = actual + Width;
-            if (centInferior < Width * Height && VectorColores[centInferior] != -1)
+            int centerBottom = actual + Width;
+            if (centerBottom < Width * Height && Colors[centerBottom] != -1)
             {
-                min = Math.Min(min, VectorColores[centInferior]);
+                min = Math.Min(min, Colors[centerBottom]);
             }
 
-            int derInferior = actual + Width + 1;
-            if (derInferior < Width * Height && VectorColores[derInferior] != -1)
+            int rightBottom = actual + Width + 1;
+            if (rightBottom < Width * Height && Colors[rightBottom] != -1)
             {
-                min = Math.Min(min, VectorColores[derInferior]);
+                min = Math.Min(min, Colors[rightBottom]);
             }
 
             return min;

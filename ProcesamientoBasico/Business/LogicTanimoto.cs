@@ -9,53 +9,53 @@ namespace ProcesamientoBasico.Business
 {
     class LogicTanimoto
     {
-        public static String[] NombrePatrones = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", 
+        public static String[] Patterns = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", 
                                   "g", "h", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "u", "v", "x", "y", "z"};
 
 
-        public static Dictionary<int, DTOBinaryObject> ObjetosPatrones{ get; private set; }
-        public Dictionary<int, DTOBinaryObject> ObjetosPlaca = new Dictionary<int, DTOBinaryObject>();
-        public Dictionary<int, DTOBinaryObject> ObjetosBinarios;
+        public static Dictionary<int, DTOBinaryObject> PatternObjects{ get; private set; }
+        public Dictionary<int, DTOBinaryObject> PlateObjects = new Dictionary<int, DTOBinaryObject>();
+        public Dictionary<int, DTOBinaryObject> BinaryObjects;
 
         private static bool isSet = false;
 
-        DTOBinaryObject Objeto1 = new DTOBinaryObject();
-        DTOBinaryObject Objeto2 = new DTOBinaryObject();
+        DTOBinaryObject BinaryObject1 = new DTOBinaryObject();
+        DTOBinaryObject BinaryObject2 = new DTOBinaryObject();
 
-        public LogicTanimoto(Dictionary<int, DTOBinaryObject> dic)
+        public LogicTanimoto(Dictionary<int, DTOBinaryObject> dictionary)
         {
             
-            ObjetosBinarios = new Dictionary<int, DTOBinaryObject>(dic);
-            ObjetosPatrones = new Dictionary<int, DTOBinaryObject>();
-            ObjetosPatrones = setPatrones();
+            BinaryObjects = new Dictionary<int, DTOBinaryObject>(dictionary);
+            PatternObjects = new Dictionary<int, DTOBinaryObject>();
+            PatternObjects = setPatterns();
         }
 
         public DTOBinaryObject getBinaryObjectByName(String id) 
         {
-            return ObjetosBinarios[Convert.ToInt32(id)];
+            return BinaryObjects[Convert.ToInt32(id)];
         }
 
         public DTOBinaryObject getPatternObjectByName(string id)
         {
-            return ObjetosPatrones[(int)(id)[0]];
+            return PatternObjects[(int)(id)[0]];
         }
 
         public List<int> getValuesComboBoxOne() {
             List<int> listCombo = new List<int>();
-            int Altura;
-            int Anchura;
+            int height;
+            int width;
 
-            foreach (int x in ObjetosBinarios.Keys)
+            foreach (int objectKey in BinaryObjects.Keys)
             {
-                Objeto1 = ObjetosBinarios[x];
-                Altura = Objeto1.Altura;
-                Anchura = Objeto1.Anchura;
+                BinaryObject1 = BinaryObjects[objectKey];
+                height = BinaryObject1.Height;
+                width = BinaryObject1.Width;
 
-                if (Altura > 110 || Altura < 15 || Anchura > 50 || Anchura < 5)
+                if (height > 110 || height < 15 || width > 50 || width < 5)
                     continue;
 
-                ObjetosPlaca.Add(Objeto1.Cordenadas.PosX, Objeto1);
-                listCombo.Add(x);
+                PlateObjects.Add(BinaryObject1.Points.PosX, BinaryObject1);
+                listCombo.Add(objectKey);
 
             }
          
@@ -64,174 +64,176 @@ namespace ProcesamientoBasico.Business
 
         public void evaluateImages()
         {
-            int Altura;
-            int Anchura;
-            foreach (int x in ObjetosBinarios.Keys)
-            {
-                Objeto1 = ObjetosBinarios[x];
-                Altura = Objeto1.Altura;
-                Anchura = Objeto1.Anchura;
+            int height;
+            int width;
 
-                if (Altura > 110 || Altura < 15 || Anchura > 50 || Anchura < 5)
+            foreach (int objectKey in BinaryObjects.Keys)
+            {
+                BinaryObject1 = BinaryObjects[objectKey];
+                height = BinaryObject1.Height;
+                width = BinaryObject1.Width;
+
+                if (height > 110 || height < 15 || width > 50 || width < 5)
                     continue;
 
-                ObjetosPlaca.Add(Objeto1.Cordenadas.PosX, Objeto1);
+                PlateObjects.Add(BinaryObject1.Points.PosX, BinaryObject1);
             }
         }
 
-        public double algoritmoTinamoto(DTOBinaryObject Objeto1, DTOBinaryObject Objeto2)
+        public double tanimotoDistance(DTOBinaryObject BinaryObject1, DTOBinaryObject BinaryObject2)
         {
-            int ambosPixeles = 0;
-            int izqPixeles = 0;
-            int derPixeles = 0;
+            int bothPixels = 0;
+            int leftPixels = 0;
+            int rightPixels = 0;
             double total = 0;
 
-            DTOCoordinate diff = new DTOCoordinate(Objeto2.CentroDeMasa.PosX - Objeto1.CentroDeMasa.PosX,
-                                             Objeto2.CentroDeMasa.PosY - Objeto1.CentroDeMasa.PosY);
+            DTOCoordinate diff = new DTOCoordinate(BinaryObject2.CenterOfMass.PosX - BinaryObject1.CenterOfMass.PosX,
+                                             BinaryObject2.CenterOfMass.PosY - BinaryObject1.CenterOfMass.PosY);
 
-            for (int j = 0; j < Objeto2.Altura; j++)
-                for (int i = 0; i < Objeto2.Anchura; i++)
+            for (int iteratorHeight = 0; iteratorHeight < BinaryObject2.Height; iteratorHeight++)
+            {
+                for (int iteratorWidth = 0; iteratorWidth < BinaryObject2.Width; iteratorWidth++)
                 {
 
-                    if (j - diff.PosY < 0 || j - diff.PosY >= Objeto1.Altura
-                        || i - diff.PosX < 0 || i - diff.PosX >= Objeto1.Anchura)
+                    if (iteratorHeight - diff.PosY < 0 || iteratorHeight - diff.PosY >= BinaryObject1.Height
+                        || iteratorWidth - diff.PosX < 0 || iteratorWidth - diff.PosX >= BinaryObject1.Width)
                         continue;
 
-                    int itAbove = (j - diff.PosY) * Objeto1.Anchura + (i - diff.PosX);
-                    int it = j * Objeto2.Anchura + i;
+                    int itAbove = (iteratorHeight - diff.PosY) * BinaryObject1.Width + (iteratorWidth - diff.PosX);
+                    int it = iteratorHeight * BinaryObject2.Width + iteratorWidth;
 
-                    if (Objeto2.Pixeles[it] != -1 && Objeto1.Pixeles[itAbove] != -1)
+                    if (BinaryObject2.Pixels[it] != -1 && BinaryObject1.Pixels[itAbove] != -1)
                     {
-                        ambosPixeles++;
+                        bothPixels++;
                     }
-                    else if (Objeto1.Pixeles[itAbove] != -1)
+                    else if (BinaryObject1.Pixels[itAbove] != -1)
                     {
-                        izqPixeles++;
+                        leftPixels++;
                     }
-                    else if (Objeto2.Pixeles[it] != -1)
+                    else if (BinaryObject2.Pixels[it] != -1)
                     {
-                        derPixeles++;
+                        rightPixels++;
                     }
                 }
+            }
 
-            int totalPixeles = Objeto1.getTotalActivePixels();
+            int totalPixeles = BinaryObject1.totalActivePixels;
 
-            izqPixeles = Objeto1.getTotalActivePixels();
-            derPixeles = Objeto2.getTotalActivePixels();
+            leftPixels = BinaryObject1.totalActivePixels;
+            rightPixels = BinaryObject2.totalActivePixels;
 
-            total = Convert.ToDouble(izqPixeles + derPixeles - (2 * ambosPixeles)) / Convert.ToDouble(izqPixeles + derPixeles - ambosPixeles);
+            total = Convert.ToDouble(leftPixels + rightPixels - (2 * bothPixels)) / Convert.ToDouble(leftPixels + rightPixels - bothPixels);
             return total;
         }
 
-        public String obtenerPlacas()
+        public String getPlate()
         {
-            DTOBinaryObject ObjetoPatron = new DTOBinaryObject();
-            DTOBinaryObject ObjetoEscalado = new DTOBinaryObject();
-            List<Double> Distancias = new List<Double>();
+            DTOBinaryObject patternObject = new DTOBinaryObject();
+            DTOBinaryObject resizedObject = new DTOBinaryObject();
+            List<Double> distances = new List<Double>();
             evaluateImages();
 
-            String placa = String.Empty;
-            double minimo = 1.0, distanciaTinamoto = 1.0;
-            Char caracter = ' ';
-            var ordered = ObjetosPlaca.OrderBy(x => x.Key);
+            String plate = String.Empty;
+            double minimum = 1.0, distance = 1.0;
+            Char character = ' ';
+            var ordered = PlateObjects.OrderBy(x => x.Key);
 
-            foreach (var varPlaca in ordered)
+            foreach (var varPlate in ordered)
             {
-                DTOBinaryObject objeto = varPlaca.Value;
-                minimo = 1.0;
+                DTOBinaryObject objeto = varPlate.Value;
+                minimum = 1.0;
 
-                foreach (int llave in ObjetosPatrones.Keys)
+                foreach (int key in PatternObjects.Keys)
                 {
-                    ObjetoPatron = ObjetosPatrones[llave];
-                    ObjetoEscalado = Escalar(objeto, ObjetoPatron.Altura, ObjetoPatron.Anchura);
-                    ObjetoEscalado.CalcularCentroDeMasa();
+                    patternObject = PatternObjects[key];
+                    resizedObject = Scalar(objeto, patternObject.Height, patternObject.Width);
+                    resizedObject.setCenterOfMass();
 
-                    distanciaTinamoto = algoritmoTinamoto(ObjetoEscalado, ObjetoPatron);
+                    distance = tanimotoDistance(resizedObject, patternObject);
 
-                    if (distanciaTinamoto < minimo)
+                    if (distance < minimum)
                     {
-                        minimo = distanciaTinamoto;
-                        caracter = llave < 10 ? llave.ToString()[0] : Char.ToUpper((char)llave);
+                        minimum = distance;
+                        character = key < 10 ? key.ToString()[0] : Char.ToUpper((char)key);
                     }
                 }
 
-                Distancias.Add(minimo);
-                placa += caracter;
+                distances.Add(minimum);
+                plate += character;
             }
 
-            while (Distancias.Count > 7)
+            while (distances.Count > 7)
             {
-                int indexMax = !Distancias.Any() ? -1 : Distancias.
+                int indexMax = !distances.Any() ? -1 : distances.
                     Select((value, index) => new { Value = value, Index = index })
                     .Aggregate((a, b) => (a.Value > b.Value) ? a : b).Index;
 
-                Distancias.Remove(Distancias.Max());
+                distances.Remove(distances.Max());
 
-                placa = placa.Remove(indexMax, 1);
+                plate = plate.Remove(indexMax, 1);
             }
 
-            if (Char.IsNumber(placa[2]))
+            if (Char.IsNumber(plate[2]))
             {
-                placa = placa.Insert(2, "-");
-                placa = placa.Insert(5, "-");
+                plate = plate.Insert(2, "-");
+                plate = plate.Insert(5, "-");
             }
             else
             {
-                placa = placa.Insert(3, "-");
-                placa = placa.Insert(6, "-");
+                plate = plate.Insert(3, "-");
+                plate = plate.Insert(6, "-");
             }
 
-            return placa;
+            return plate;
         }
 
-        static private Dictionary<int, DTOBinaryObject> setPatrones()
+        static private Dictionary<int, DTOBinaryObject> setPatterns()
         {
             if (isSet == false)
             {
-                foreach (String nombre in NombrePatrones)
+                foreach (String name in Patterns)
                 {
-                    String ruta = @"\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ProcesamientoBasico\ProcesamientoBasico\Imagenes\Patrones\" + nombre + ".bmp";
+                    String ruta = @"\\vmware-host\Shared Folders\Documents\Visual Studio 2012\Projects\ProcesamientoBasico\ProcesamientoBasico\Imagenes\Patrones\" + name + ".bmp";
                     Bitmap map = new Bitmap(ruta);
-                    ObjetosPatrones[(int)nombre[0]] = new DTOBinaryObject(map, (int)nombre[0]);
-                    ObjetosPatrones[(int)nombre[0]].CalcularCentroDeMasa();
+                    PatternObjects[(int)name[0]] = new DTOBinaryObject(map, (int)name[0]);
+                    PatternObjects[(int)name[0]].setCenterOfMass();
                 }
             }
 
-            return ObjetosPatrones;
+            return PatternObjects;
         }
 
-        public DTOBinaryObject Escalar(DTOBinaryObject Objeto1, int NuevaAltura, int NuevaAnchura)
+        public DTOBinaryObject Scalar(DTOBinaryObject binaryObject, int newHeight, int netWidth)
         {
-            DTOBinaryObject nuevoObjeto = new DTOBinaryObject();
+            DTOBinaryObject newBinaryObject = new DTOBinaryObject();
 
-            int tempX;
-            int tempY;
-
+            int tempX, tempY, it, itTemp;
             float esc_x = 0;
             float esc_y = 0;
 
-            esc_y = (float)NuevaAltura / (float)Objeto1.Altura;
-            esc_x = (float)NuevaAnchura / (float)Objeto1.Anchura;
+            esc_y = (float)newHeight / (float)binaryObject.Height;
+            esc_x = (float)netWidth / (float)binaryObject.Width;
 
-            nuevoObjeto.Etiqueta = Objeto1.Etiqueta;
-            nuevoObjeto.Altura = NuevaAltura;
-            nuevoObjeto.Anchura = NuevaAnchura;
-            nuevoObjeto.Pixeles = new int[NuevaAltura * NuevaAnchura];
+            newBinaryObject.Label = binaryObject.Label;
+            newBinaryObject.Height = newHeight;
+            newBinaryObject.Width = netWidth;
+            newBinaryObject.Pixels = new int[newHeight * netWidth];
 
-            for (int y = 0; y < NuevaAltura; y++)
-                for (int x = 0; x < NuevaAnchura; x++)
+            for (int iteratorHeight = 0; iteratorHeight < newHeight; iteratorHeight++)
+            {
+                for (int interatorWidth = 0; interatorWidth < netWidth; interatorWidth++)
                 {
-
-                    tempX = (int)(x / esc_x);
-                    tempY = (int)(y / esc_y);
-                    int it = y * NuevaAnchura + x;
-                    int itTemp = tempY * Objeto1.Anchura + tempX;
-                    nuevoObjeto.Pixeles[it] = Objeto1.Pixeles[itTemp];
+                    tempX = (int)(interatorWidth / esc_x);
+                    tempY = (int)(iteratorHeight / esc_y);
+                    it = iteratorHeight * netWidth + interatorWidth;
+                    itTemp = tempY * binaryObject.Width + tempX;
+                    newBinaryObject.Pixels[it] = binaryObject.Pixels[itTemp];
                 }
+            }
 
-            nuevoObjeto.CalcularCentroDeMasa();
+            newBinaryObject.setCenterOfMass();
 
-            return nuevoObjeto;
+            return newBinaryObject;
         }
 
     }

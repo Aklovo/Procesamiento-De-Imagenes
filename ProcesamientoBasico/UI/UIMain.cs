@@ -27,199 +27,200 @@ namespace ProcesamientoBasico
 
         private void escalaDeGrisesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            PBImagen.Image = ob.getMapa();
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            basicOperations.decomposeRGB();
+            basicOperations.greyScale();
+            basicOperations.composeRGB();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void binarizacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.binarizacion(125);
-            ob.componerRGB();
-            PBImagen.Image = ob.getMapa();
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            basicOperations.decomposeRGB();
+            basicOperations.binarization(125);
+            basicOperations.composeRGB();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void negativoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.negativo();
-            ob.componerRGB();
-            PBImagen.Image = ob.getMapa();
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            basicOperations.decomposeRGB();
+            basicOperations.negative();
+            basicOperations.composeRGB();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void componenteRojoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.componenteRojo();
-            PBImagen.Image = ob.getMapa();
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            basicOperations.decomposeRGB();
+            basicOperations.redComponent();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void componenteVerdeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.componenteVerde();
-            PBImagen.Image = ob.getMapa();
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            basicOperations.decomposeRGB();
+            basicOperations.greenComponent();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void componenteAzulToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.componenteAzul();
-            PBImagen.Image = ob.getMapa();
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            basicOperations.decomposeRGB();
+            basicOperations.blueComponent();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void clasificacionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.binarizacion(125);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            ob.segmentacion();
+            LogicSegmentation segmentation = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            segmentation.decomposeRGB();
+            segmentation.binarization(125);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
+            segmentation.segmentation();
 
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = segmentation.getImageMap();
         }
 
         private void objetosBinariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
-            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            LogicSegmentation segmentation = new LogicSegmentation((Bitmap)this.PBImagen.Image);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            segmentation.decomposeRGB();
+            segmentation.greyScale();
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
-            ob.descomponerRGB();
-            ob.binarizacion(125);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            segmentation.decomposeRGB();
+            segmentation.binarization(125);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
-            ob.generarObjetosBinarios();
+            segmentation.generateBinaryObjects();
             
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = segmentation.getImageMap();
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
             Bitmap bmp1 = new Bitmap((Bitmap)this.PBImagen.Image);
-            bmp1.Save("TEST.gif", System.Drawing.Imaging.ImageFormat.Gif);
+            bmp1.Save("image.gif", System.Drawing.Imaging.ImageFormat.Gif);
         }
 
         private void bordeHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.bordeHorizontal();
+            basicOperations.decomposeRGB();
+            basicOperations.greyScale();
+            basicOperations.horizontalEdge();
 
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void bordeVerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.bordeVertical();
+            basicOperations.decomposeRGB();
+            basicOperations.greyScale();
+            basicOperations.verticalEdge();
 
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void filtroRobertsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LogicBasicOperations ob = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
+            LogicBasicOperations basicOperations = new LogicBasicOperations((Bitmap)this.PBImagen.Image);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.filtroRoberts();
+            basicOperations.decomposeRGB();
+            basicOperations.greyScale();
+            basicOperations.robertsCross();
 
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = basicOperations.getImageMap();
         }
 
         private void segmentacionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.binarizacion(125);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            ob.segmentacion();
+            LogicSegmentation segmentation = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            segmentation.decomposeRGB();
+            segmentation.binarization(125);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
+            segmentation.segmentation();
 
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = segmentation.getImageMap();
         }
 
         private void distanciaTinamotoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            LogicSegmentation segmentation = new LogicSegmentation((Bitmap)this.PBImagen.Image);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            segmentation.decomposeRGB();
+            segmentation.greyScale();
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
             
-            ob.descomponerRGB();
-            ob.binarizacion(90);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
-            PBImagen.Image = ob.getMapa();
+            segmentation.decomposeRGB();
+            segmentation.binarization(90);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
-            UITanimoto tanimoto = new UITanimoto(objetos);
+            Dictionary<int, DTOBinaryObject> binaryObjects = segmentation.generateBinaryObjects();
+            PBImagen.Image = segmentation.getImageMap();
+
+            UITanimoto tanimoto = new UITanimoto(binaryObjects);
             tanimoto.Show();
         }
 
         private void objetosBinariosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            LogicSegmentation segmentation = new LogicSegmentation((Bitmap)this.PBImagen.Image);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            segmentation.decomposeRGB();
+            segmentation.greyScale();
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
-            ob.descomponerRGB();
-            ob.binarizacion(125);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            segmentation.decomposeRGB();
+            segmentation.binarization(125);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
-            ob.generarObjetosBinarios();
-            ob.imprimirObjetos();
-            PBImagen.Image = ob.getMapa();
+            segmentation.generateBinaryObjects();
+            segmentation.printObjects();
+            PBImagen.Image = segmentation.getImageMap();
         }
 
         private void placasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UICarPlates placas = new UICarPlates();
-            placas.Show();
+            UICarPlates plates = new UICarPlates();
+            plates.Show();
         }
 
 
         private void btnBright_Click(object sender, EventArgs e)
         {
             decimal numericValue = numericUpDown1.Value;
-            LogicSegmentation ob = new LogicSegmentation((Bitmap)this.PBImagen.Image);
-            ob.descomponerRGB();
-            ob.getAbrillantamiento((double)numericValue);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            LogicSegmentation segmentation = new LogicSegmentation((Bitmap)this.PBImagen.Image);
+            segmentation.decomposeRGB();
+            segmentation.getNoise((double)numericValue);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
-            PBImagen.Image = ob.getMapa();
+            PBImagen.Image = segmentation.getImageMap();
             
-           }
+        }
 
         private void UIMain_Load(object sender, EventArgs e)
         {

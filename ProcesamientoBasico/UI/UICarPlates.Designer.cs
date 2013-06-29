@@ -40,6 +40,7 @@
             this.pictureHistogram = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
             this.labelUmbral = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureHistogram)).BeginInit();
@@ -61,7 +62,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(473, 83);
+            this.label3.Location = new System.Drawing.Point(473, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 11;
@@ -167,11 +168,21 @@
             this.labelUmbral.TabIndex = 21;
             this.labelUmbral.Text = "xxx";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(476, 150);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Imagen";
+            // 
             // UICarPlates
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(836, 456);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.labelUmbral);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureHistogram);
@@ -207,5 +218,6 @@
         private System.Windows.Forms.PictureBox pictureHistogram;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelUmbral;
+        private System.Windows.Forms.Label label5;
     }
 }

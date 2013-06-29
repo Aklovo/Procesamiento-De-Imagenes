@@ -14,9 +14,7 @@ namespace ProcesamientoBasico
 {
     public partial class UICarPlates : Form
     {
-
-        LogicSegmentation ob;
-        Bitmap map;
+        private Bitmap ImageMap;
 
         public UICarPlates()
         {
@@ -41,53 +39,55 @@ namespace ProcesamientoBasico
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             Dictionary<int, int> mapPixels = new Dictionary<int,int>();
-            int bestUmbral;
-            map = new Bitmap(comboBox1.Text);
+            int optimalThreshold;
+            ImageMap = new Bitmap(comboBox1.Text);
 
-            ob = new LogicSegmentation(map);
+            LogicSegmentation segmentation = new LogicSegmentation(ImageMap);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            mapPixels = ob.getMapOfPixels();
+            segmentation.decomposeRGB();
+            segmentation.greyScale();
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
+            mapPixels = segmentation.getMapOfPixels();
 
-            bestUmbral = ob.getBestUmbral(mapPixels);
+            LogicOptimalThreshold threshold = new LogicOptimalThreshold(mapPixels);
+            optimalThreshold = threshold.OptimalThreshold;
+            
+            pictureHistogram.Image = segmentation.getHistogram(mapPixels, optimalThreshold);
 
-            pictureHistogram.Image = ob.getHistrogram(mapPixels, bestUmbral);
+            segmentation.decomposeRGB();
+            segmentation.binarization(optimalThreshold);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
+            pictureBox1.Image = ImageMap;
 
-            ob.descomponerRGB();
-            ob.binarizacion(bestUmbral);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            pictureBox1.Image = map;
-
-            labelUmbral.Text = bestUmbral.ToString();
-            Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
-            LogicTanimoto tanimoto = new LogicTanimoto(objetos);
-            label2.Text = tanimoto.obtenerPlacas();
+            labelUmbral.Text = optimalThreshold.ToString();
+            Dictionary<int, DTOBinaryObject> binaryObjects = segmentation.generateBinaryObjects();
+            LogicTanimoto tanimoto = new LogicTanimoto(binaryObjects);
+            label2.Text = tanimoto.getPlate();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            ob = new LogicSegmentation(map);
+            LogicSegmentation segmentation = new LogicSegmentation(ImageMap);
 
-            ob.descomponerRGB();
-            ob.escalaDeGrises();
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
+            segmentation.decomposeRGB();
+            segmentation.greyScale();
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
 
 
-            ob.descomponerRGB();
-            ob.binarizacion((int)numericUpDown1.Value);
-            ob.componerRGB();
-            ob.setMapa(ob.getMapa());
-            pictureBox1.Image = ob.getMapa();
+            segmentation.decomposeRGB();
+            segmentation.binarization((int)numericUpDown1.Value);
+            segmentation.composeRGB();
+            segmentation.setMapImage(segmentation.getImageMap());
+            pictureBox1.Image = segmentation.getImageMap();
 
-            Dictionary<int, DTOBinaryObject> objetos = ob.generarObjetosBinarios();
-            LogicTanimoto tanimoto = new LogicTanimoto(objetos);
-            label2.Text = tanimoto.obtenerPlacas();
+            Dictionary<int, DTOBinaryObject> binaryObjects = segmentation.generateBinaryObjects();
+            LogicTanimoto tanimoto = new LogicTanimoto(binaryObjects);
+            label2.Text = tanimoto.getPlate();
         }
 
     }

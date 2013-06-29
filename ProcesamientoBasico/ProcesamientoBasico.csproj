@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\LogicOptimalThreshold.cs" />
     <Compile Include="Business\LogicSegmentation.cs" />
     <Compile Include="Business\LogicTanimoto.cs" />
     <Compile Include="DTO\DTOCoordinate.cs" />
